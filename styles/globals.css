@@ -1,60 +1,240 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Color System */
-  --primary: oklch(0.65 0.2 30); /* #ea580c */
-  --primary-light: oklch(0.7 0.18 30); /* #ff844d */
-  --primary-extra-light: oklch(0.9 0.05 30); /* #fcdfcf */
-  --accent: oklch(0 0 0); /* #000000 */
+	/* Color System */
+	--primary: oklch(0.65 0.2 30); /* #ea580c */
+	--primary-light: oklch(0.7 0.18 30); /* #ff844d */
+	--primary-extra-light: oklch(0.9 0.05 30); /* #fcdfcf */
+	--accent: oklch(0 0 0); /* #000000 */
 
-  --white: oklch(1 0 0); /* #ffffff */
-  --neutral-background: oklch(0.98 0.003 240); /* #f9fafb */
-  --neutral-surface: oklch(0.96 0.003 240); /* #f3f4f6 */
-  --neutral-dividers: oklch(0.92 0.003 240); /* #e5e7eb */
-  --neutral-muted-text: oklch(0.85 0.003 240); /* #d1d5db */
-  --neutral-body-text: oklch(0.7 0.003 240); /* #9ca3af */
-  --neutral-strong-text: oklch(0.52 0.003 240); /* #6b7280 */
-  --neutral-headings: oklch(0.4 0.003 240); /* #4b5563 */
-  --neutral-emphasis-text: oklch(0.32 0.003 240); /* #374151 */
-  --neutral-high-contrast: oklch(0.15 0.003 240); /* #111827 */
+	--white: oklch(1 0 0); /* #ffffff */
+	--neutral-background: oklch(0.98 0.003 240); /* #f9fafb */
+	--neutral-surface: oklch(0.96 0.003 240); /* #f3f4f6 */
+	--neutral-dividers: oklch(0.92 0.003 240); /* #e5e7eb */
+	--neutral-muted-text: oklch(0.85 0.003 240); /* #d1d5db */
+	--neutral-body-text: oklch(0.7 0.003 240); /* #9ca3af */
+	--neutral-strong-text: oklch(0.52 0.003 240); /* #6b7280 */
+	--neutral-headings: oklch(0.4 0.003 240); /* #4b5563 */
+	--neutral-emphasis-text: oklch(0.32 0.003 240); /* #374151 */
+	--neutral-high-contrast: oklch(0.15 0.003 240); /* #111827 */
 
-  --success: oklch(0.7 0.15 160); /* #10b981 */
-  --warning: oklch(0.75 0.18 80); /* #f59e0b */
-  --error: oklch(0.65 0.23 25); /* #ef4444 */
+	--success: oklch(0.7 0.15 160); /* #10b981 */
+	--warning: oklch(0.75 0.18 80); /* #f59e0b */
+	--error: oklch(0.65 0.23 25); /* #ef4444 */
 
-  /* Mapping to Tailwind's color system */
-  --colors-primary: var(--primary);
-  --colors-primary-light: var(--primary-light);
-  --colors-primary-extra-light: var(--primary-extra-light);
-  --colors-accent: var(--accent);
-  --colors-white: var(--white);
-  --colors-neutral-background: var(--neutral-background);
-  --colors-neutral-surface: var(--neutral-surface);
-  --colors-neutral-dividers: var(--neutral-dividers);
-  --colors-neutral-muted-text: var(--neutral-muted-text);
-  --colors-neutral-body-text: var(--neutral-body-text);
-  --colors-neutral-strong-text: var(--neutral-strong-text);
-  --colors-neutral-headings: var(--neutral-headings);
-  --colors-neutral-emphasis-text: var(--neutral-emphasis-text);
-  --colors-neutral-high-contrast: var(--neutral-high-contrast);
-  --colors-success: var(--success);
-  --colors-warning: var(--warning);
-  --colors-error: var(--error);
+	/* Mapping to Tailwind's color system */
+	--colors-primary: var(--primary);
+	--colors-primary-light: var(--primary-light);
+	--colors-primary-extra-light: var(--primary-extra-light);
+	--colors-accent: var(--accent);
+	--colors-white: var(--white);
+	--colors-neutral-background: var(--neutral-background);
+	--colors-neutral-surface: var(--neutral-surface);
+	--colors-neutral-dividers: var(--neutral-dividers);
+	--colors-neutral-muted-text: var(--neutral-muted-text);
+	--colors-neutral-body-text: var(--neutral-body-text);
+	--colors-neutral-strong-text: var(--neutral-strong-text);
+	--colors-neutral-headings: var(--neutral-headings);
+	--colors-neutral-emphasis-text: var(--neutral-emphasis-text);
+	--colors-neutral-high-contrast: var(--neutral-high-contrast);
+	--colors-success: var(--success);
+	--colors-warning: var(--warning);
+	--colors-error: var(--error);
 
-  /* Font Families */
-  --font-dm-sans: "DM Sans", sans-serif;
-  --font-poppins: "Poppins", sans-serif;
+	/* Font Families */
+	--font-dm-sans: 'DM Sans', sans-serif;
+	--font-poppins: 'Poppins', sans-serif;
+
+	/* Custom Shadow System */
+	--shadow-sm: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	--shadow-md: 0px 6px 12px 0px rgba(234, 88, 12, 0.12);
 }
 
 /* Font Family Utility Classes */
 @layer utilities {
-  .font-dm-sans {
-    font-family: var(--font-dm-sans);
-  }
-  .font-poppins {
-    font-family: var(--font-poppins);
-  }
+	.font-dm-sans {
+		font-family: var(--font-dm-sans);
+	}
+
+	.font-poppins {
+		font-family: var(--font-poppins);
+	}
+
+	.shadow-soft {
+		box-shadow: var(--shadow-sm);
+	}
+
+	.shadow-primary {
+		box-shadow: var(--shadow-md);
+	}
+}
+
+html,
+body {
+	overflow-x: hidden !important;
+	position: relative;
+	width: 100vw;
+	max-width: 100vw;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior-x: none;
+}
+
+body::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	pointer-events: none;
+	z-index: -1;
+}
+
+* {
+	max-width: 100vw;
+	box-sizing: border-box;
+}
+
+[style*='transform'] {
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	will-change: transform;
+	contain: paint;
+}
+
+/* Typography System */
+/* Mobile Typography (default) */
+.t-style-h1 {
+	font-size: 30px;
+	font-family: var(--font-dm-sans);
+	font-weight: 700;
+	letter-spacing: 0px;
+	line-height: 40px;
+}
+
+.t-style-h2 {
+	font-size: 24px;
+	font-family: var(--font-dm-sans);
+	font-weight: 600;
+	letter-spacing: 0px;
+	line-height: 36px;
+}
+
+.t-style-h3 {
+	font-size: 20px;
+	font-family: var(--font-dm-sans);
+	font-weight: 500;
+	letter-spacing: 0px;
+	line-height: 30px;
+}
+
+.t-style-body {
+	font-size: 16px;
+	font-family: var(--font-poppins);
+	font-weight: 400;
+	letter-spacing: 0px;
+	line-height: 26px;
+}
+
+.t-style-link {
+	font-size: 16px;
+	font-family: var(--font-poppins);
+	font-weight: 500;
+	letter-spacing: 0px;
+	line-height: 24px;
+}
+
+.t-style-caption {
+	font-size: 12px;
+	font-family: var(--font-poppins);
+	font-weight: 500;
+	letter-spacing: 0px;
+	line-height: 18px;
+}
+
+/* Tablet Typography (768px and up) */
+@media (min-width: 768px) {
+	.t-style-h1 {
+		font-size: 30px;
+		font-family: var(--font-dm-sans);
+		font-weight: 700;
+		letter-spacing: 0px;
+		line-height: 40px;
+	}
+
+	.t-style-h2 {
+		font-size: 24px;
+		font-family: var(--font-dm-sans);
+		font-weight: 600;
+		letter-spacing: 0px;
+		line-height: 36px;
+	}
+
+	.t-style-h3 {
+		font-size: 20px;
+		font-family: var(--font-dm-sans);
+		font-weight: 500;
+		letter-spacing: 0px;
+		line-height: 30px;
+	}
+
+	.t-style-body {
+		font-size: 16px;
+		font-family: var(--font-poppins);
+		font-weight: 400;
+		letter-spacing: 0px;
+		line-height: 26px;
+	}
+
+	.t-style-link {
+		font-size: 16px;
+		font-family: var(--font-poppins);
+		font-weight: 500;
+		letter-spacing: 0px;
+		line-height: 24px;
+	}
+
+	.t-style-caption {
+		font-size: 12px;
+		font-family: var(--font-poppins);
+		font-weight: 500;
+		letter-spacing: 0px;
+		line-height: 18px;
+	}
+}
+
+/* Desktop Typography (1280px and up) */
+@media (min-width: 1280px) {
+	.t-style-h1 {
+		font-size: 36px;
+		line-height: 48px;
+	}
+
+	.t-style-h2 {
+		font-size: 30px;
+		line-height: 48px;
+	}
+
+	.t-style-h3 {
+		font-size: 24px;
+		line-height: 40px;
+	}
+
+	.t-style-body {
+		font-size: 18px;
+		line-height: 30px;
+	}
+
+	.t-style-link {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.t-style-caption {
+		font-size: 14px;
+		line-height: 20px;
+	}
 }
