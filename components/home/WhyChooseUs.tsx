@@ -174,7 +174,7 @@ export const WhyChooseUs: React.FC = () => {
 										alt=''
 										width={24}
 										height={24}
-										className='w-full h-auto object-cover'
+										className='w-[24px] h-[24px] object-cover'
 										priority
 										aria-hidden='true'
 									/>
@@ -203,13 +203,7 @@ export const WhyChooseUs: React.FC = () => {
 					role='img'
 					aria-label='Luxury AMG car showcasing our premium vehicle collection'
 				>
-					<motion.div
-						className='w-full max-w-[350px] h-auto'
-						whileHover={{
-							scale: 1.05,
-							transition: { duration: 0.4, ease: 'easeInOut' },
-						}}
-					>
+					<motion.div className='w-full max-w-[350px] h-auto'>
 						<Image
 							src='/images/Amg.svg'
 							alt='Luxury AMG car showcasing our premium vehicle collection'
@@ -256,7 +250,7 @@ export const WhyChooseUs: React.FC = () => {
 										alt=''
 										width={24}
 										height={24}
-										className='w-full h-auto object-cover'
+										className='w-[24px] h-[24px] object-cover'
 										priority
 										aria-hidden='true'
 									/>
