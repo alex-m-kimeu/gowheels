@@ -93,13 +93,14 @@ const calendarClassNames = {
 export const Hero = ({ form, onSubmit }: HeroProps) => {
 	return (
 		<motion.section
-			className='relative w-full mb-[350px] md:mb-[380px] lg:mb-[200px] xl:mb-[150px]'
+			className='relative w-full mb-[350px] md:mb-[350px] lg:mb-[180px] xl:mb-[100px]'
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{
 				duration: 0.8,
 				ease: 'easeInOut',
 			}}
+			aria-label='Hero section with car rental search'
 		>
 			<header className='p-[16px] sm:p-[24px] md:p-[40px] xl:p-[64px_0px_32px_80px] 2xl:p-[64px_0px_32px_120px] bg-[linear-gradient(180deg,_#FFF_0%,_#FCDFCF_100%)] overflow-hidden'>
 				<div className='w-full max-w-[1920px] hidden xl:flex items-center justify-between mx-auto'>
@@ -130,8 +131,10 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 							initial='hidden'
 							animate='visible'
 							transition={{ delayChildren: 0.8 }}
+							role='list'
+							aria-label='Key features'
 						>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem}>
+							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
 								<span
 									className='flex items-center justify-center text-[18px] w-[24px]'
 									aria-hidden='true'
@@ -142,13 +145,13 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									Browse premium vehicles
 								</span>
 							</motion.li>
-							<li aria-hidden='true'>
+							<li aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[40px] md:!h-[20px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</li>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem}>
+							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
 								<span
 									className='flex items-center justify-center text-[18px] w-[24px]'
 									aria-hidden='true'
@@ -159,13 +162,13 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									Book in minutes
 								</span>
 							</motion.li>
-							<li aria-hidden='true'>
+							<li aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[40px] md:!h-[20px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</li>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem}>
+							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
 								<span
 									className='flex items-center justify-center text-[18px] w-[24px]'
 									aria-hidden='true'
@@ -200,7 +203,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									</Button>
 								</motion.div>
 							</Link>
-							<span aria-hidden='true'>
+							<span aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[25px] !w-[2px] !bg-[var(--neutral-body-text)]'
@@ -232,7 +235,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						>
 							<Image
 								src='/images/Hero.svg'
-								alt='Luxury car illustration'
+								alt='Luxury car illustration showcasing GoWheels premium vehicle collection'
 								width={957}
 								height={566}
 								className='w-full max-w-[1000px]'
@@ -241,6 +244,8 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						</motion.figure>
 					</div>
 				</div>
+
+				{/* Mobile/Tablet Layout */}
 				<div className='w-full flex flex-col lg:flex-row xl:hidden items-center justify-between mx-auto gap-[24px] lg:gap-[16px]'>
 					<motion.div
 						className='flex flex-col items-center lg:items-start gap-[16px] lg:gap-[24px] shrink-0 w-full lg:w-[400px]'
@@ -269,8 +274,10 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 							initial='hidden'
 							animate='visible'
 							transition={{ delayChildren: 0.8 }}
+							role='list'
+							aria-label='Key features'
 						>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem}>
+							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
 								<span className='flex items-center justify-center t-style-caption' aria-hidden='true'>
 									🚘
 								</span>
@@ -278,13 +285,13 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									Browse premium vehicles
 								</span>
 							</motion.li>
-							<li aria-hidden='true'>
+							<li aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[20px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</li>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem}>
+							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
 								<span className='flex items-center justify-center t-style-caption' aria-hidden='true'>
 									🕒
 								</span>
@@ -292,13 +299,13 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									Book in minutes
 								</span>
 							</motion.li>
-							<li aria-hidden='true'>
+							<li aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[20px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</li>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem}>
+							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
 								<span className='flex items-center justify-center t-style-caption' aria-hidden='true'>
 									💼
 								</span>
@@ -330,7 +337,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									</Button>
 								</motion.div>
 							</Link>
-							<span aria-hidden='true'>
+							<span aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[25px] !w-[2px] !bg-[var(--neutral-body-text)]'
@@ -362,7 +369,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						>
 							<Image
 								src='/images/Hero-alt.svg'
-								alt='Luxury car illustration'
+								alt='Luxury car illustration showcasing GoWheels premium vehicle collection'
 								width={957}
 								height={566}
 								className='w-full'
@@ -378,20 +385,25 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 					id='car-search-form'
 					onSubmit={form.handleSubmit(onSubmit)}
 					className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 items-center p-[16px] sm:p-[20px] md:p-[24px] xl:p-[24px_40px] w-[calc(90vw)] rounded-[15px] sm:rounded-[20px] md:rounded-[25px] bg-[var(--neutral-background)] shadow-primary absolute bottom-[-350px] md:bottom-[-350px] lg:bottom-[-180px] xl:bottom-[-100px] left-1/2 transform -translate-x-1/2 h-auto xl:h-[145px] z-[50] gap-[24px] lg:gap-auto'
-					aria-label='Car search form'
+					aria-label='Car rental search form'
+					aria-describedby='form-description'
 					initial={{ opacity: 0, translateY: '30px' }}
 					animate={{ opacity: 1, translateY: '0px' }}
 					transition={{
 						duration: 0.8,
-						delay: 1.4,
+						delay: 0.8,
 						type: 'spring',
 						stiffness: 70,
 						damping: 15,
 					}}
 					style={{ willChange: 'transform' }}
 				>
-					<fieldset id='brand-fieldset' className='border-0 m-0 p-0 w-full xl:w-auto'>
-						<legend className='sr-only'>Search parameters</legend>
+					<div id='form-description' className='sr-only'>
+						Search for available rental cars by selecting your preferred brand and rental dates
+					</div>
+
+					<fieldset className='border-0 m-0 p-0 w-full xl:w-auto'>
+						<legend className='sr-only'>Car search parameters</legend>
 
 						{/* Car Brand */}
 						<FormField
@@ -431,6 +443,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 															:	'text-[var(--primary-light)] border-[var(--primary-extra-light)] focus:border-[var(--primary-extra-light)]'
 														}`}
 														aria-label='Select car brand'
+														aria-describedby={field.value ? undefined : 'brand-help'}
 													>
 														<SelectValue placeholder='Select car brand' />
 													</SelectTrigger>
@@ -458,6 +471,11 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 												</Select>
 											</div>
 										</FormControl>
+										{!field.value && (
+											<div id='brand-help' className='sr-only'>
+												Choose from our available car brands
+											</div>
+										)}
 										<FormMessage className='text-[14px] leading-[20px] font-poppins font-normal text-[var(--error)]' />
 									</div>
 								</FormItem>
@@ -465,10 +483,9 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						/>
 					</fieldset>
 
-					<fieldset
-						id='pickup-date-fieldset'
-						className='pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)] w-full xl:w-auto'
-					>
+					<fieldset className='pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)] w-full xl:w-auto'>
+						<legend className='sr-only'>Pickup date selection</legend>
+
 						{/* Pickup Date */}
 						<FormField
 							control={form.control}
@@ -508,6 +525,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 																:	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
 															}`}
 															aria-haspopup='dialog'
+															aria-expanded={false}
 															type='button'
 														>
 															{field.value ? format(field.value, 'PPP') : 'Choose a date'}
@@ -516,12 +534,12 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 												</FormControl>
 											</PopoverTrigger>
 											<PopoverContent
-												className='w-[var(--radix-popover-trigger-width)] p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none  rounded-[4px]'
+												className='w-[var(--radix-popover-trigger-width)] p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
 												align='start'
 												sideOffset={10}
 												side='bottom'
 												role='dialog'
-												aria-label='Calendar picker'
+												aria-label='Calendar picker for pickup date'
 											>
 												<div>
 													<Calendar
@@ -546,10 +564,9 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						/>
 					</fieldset>
 
-					<fieldset
-						id='return-date-fieldset'
-						className='pl-0 xl:pl-[24px] border-l-0 xl:border-l border-[var(--neutral-dividers)] w-full xl:w-auto'
-					>
+					<fieldset className='pl-0 xl:pl-[24px] border-l-0 xl:border-l border-[var(--neutral-dividers)] w-full xl:w-auto'>
+						<legend className='sr-only'>Return date selection</legend>
+
 						{/* Return Date */}
 						<FormField
 							control={form.control}
@@ -589,6 +606,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 																:	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
 															}`}
 															aria-haspopup='dialog'
+															aria-expanded={false}
 															type='button'
 														>
 															{field.value ? format(field.value, 'PPP') : 'Choose a date'}
@@ -602,7 +620,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 												sideOffset={10}
 												side='bottom'
 												role='dialog'
-												aria-label='Calendar picker'
+												aria-label='Calendar picker for return date'
 											>
 												<div>
 													<Calendar
@@ -628,10 +646,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 					</fieldset>
 
 					{/* Search Button */}
-					<div
-						id='search-button-container'
-						className='w-full pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)]'
-					>
+					<div className='w-full pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)]'>
 						<div className='h-[68px] flex items-center justify-center'>
 							<motion.div
 								whileHover={{ scale: 1.025 }}
@@ -645,12 +660,15 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 								className='w-full'
 							>
 								<Button
-									id='car-search-submit'
 									type='submit'
 									className='text-[var(--white)] t-style-link bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer w-full'
+									aria-describedby='search-help'
 								>
-									Search
+									Search Cars
 								</Button>
+								<div id='search-help' className='sr-only'>
+									Search for available rental cars based on your selected criteria
+								</div>
 							</motion.div>
 						</div>
 					</div>
@@ -659,5 +677,3 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 		</motion.section>
 	);
 };
-
-export default Hero;
