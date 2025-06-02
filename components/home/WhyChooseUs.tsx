@@ -14,7 +14,7 @@ const features = [
 	{
 		icon: '/icons/user.svg',
 		title: 'Experienced drivers',
-		description: "Don't have driver? Don't worry, we have many experienced drivers for you.",
+		description: "Don't have a driver? Don't worry, we have many experienced drivers for you.",
 		alt: 'Experienced drivers icon',
 	},
 	{
@@ -26,7 +26,7 @@ const features = [
 	{
 		icon: '/icons/messages.svg',
 		title: '24/7 technical support',
-		description: 'Have a question? Contact GoWheels support any time when you have problem.',
+		description: 'Have a question? Contact GoWheels support any time when you have a problem.',
 		alt: 'Technical support icon',
 	},
 ];
@@ -149,9 +149,9 @@ export const WhyChooseUs: React.FC = () => {
 					role='list'
 					aria-label='Primary features'
 				>
-					{features.slice(0, 2).map((feature, index) => (
+					{features.slice(0, 2).map((feature) => (
 						<motion.li
-							key={index}
+							key={feature.title}
 							className='flex flex-row md:flex-col xl:flex-row items-center gap-[24px] w-full md:w-1/2 xl:w-full'
 							variants={featureItem}
 							whileHover={{
@@ -231,9 +231,9 @@ export const WhyChooseUs: React.FC = () => {
 					role='list'
 					aria-label='Additional features'
 				>
-					{features.slice(2, 4).map((feature, index) => (
+					{features.slice(2, 4).map((feature) => (
 						<motion.li
-							key={index + 2}
+							key={feature.title}
 							className='flex flex-row md:flex-col xl:flex-row items-center gap-[24px] w-full md:w-1/2 xl:w-full'
 							variants={featureItemRight}
 							whileHover={{
