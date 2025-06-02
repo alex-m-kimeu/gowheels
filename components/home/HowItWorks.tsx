@@ -276,7 +276,7 @@ export const HowItWorks = () => {
 					aria-hidden='true'
 					variants={timelineVariant}
 					style={{ originY: 0 }}
-				 />
+				/>
 
 				<motion.div
 					className='flex flex-row w-full'
