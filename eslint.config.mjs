@@ -19,11 +19,9 @@ const eslintConfig = [
 		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
 		languageOptions: {
 			globals: {
-				// Browser globals
 				window: 'readonly',
 				document: 'readonly',
 				console: 'readonly',
-				// Node globals for config files
 				process: 'readonly',
 				Buffer: 'readonly',
 				__dirname: 'readonly',
@@ -31,15 +29,12 @@ const eslintConfig = [
 			},
 		},
 		rules: {
-			// Code quality rules
 			'no-redeclare': 'error',
 			'eol-last': ['error', 'always'],
 			'newline-before-return': 'error',
-			camelcase: 'error',
 			'no-var': 'error',
 			'prefer-const': 'error',
 
-			// Spacing and formatting (that don't conflict with Prettier)
 			'space-before-function-paren': [
 				'error',
 				{
@@ -57,8 +52,6 @@ const eslintConfig = [
 					after: true,
 				},
 			],
-
-			// Error prevention
 			'for-direction': 'error',
 			'getter-return': 'error',
 			'no-await-in-loop': 'error',
@@ -69,8 +62,6 @@ const eslintConfig = [
 			'no-template-curly-in-string': 'error',
 			'no-unreachable': 'warn',
 			'no-unreachable-loop': 'error',
-
-			// Best practices
 			'class-methods-use-this': 'off',
 			'consistent-return': 'off',
 			curly: 'error',
@@ -103,8 +94,6 @@ const eslintConfig = [
 			'prefer-promise-reject-errors': 'error',
 			'require-await': 'error',
 			yoda: 'error',
-
-			// Style rules (that don't conflict with Prettier)
 			'block-spacing': 'error',
 			'comma-spacing': [
 				'error',
@@ -153,8 +142,6 @@ const eslintConfig = [
 			'semi-spacing': 'error',
 			'semi-style': ['error', 'last'],
 			'space-unary-ops': 'error',
-
-			// ES6+ rules
 			'arrow-parens': ['error', 'always'],
 			'constructor-super': 'error',
 			'no-class-assign': 'error',
@@ -170,12 +157,8 @@ const eslintConfig = [
 			'prefer-template': 'warn',
 			'rest-spread-spacing': ['error', 'never'],
 			'template-curly-spacing': 'error',
-
-			// Complexity rules
 			'max-depth': ['warn', 4],
 			'space-infix-ops': ['error'],
-
-			// React/Next.js specific
 			'react/jsx-key': 'error',
 			'react/no-array-index-key': 'warn',
 			'react/jsx-no-duplicate-props': 'error',
@@ -185,8 +168,6 @@ const eslintConfig = [
 			'react/require-render-return': 'error',
 			'react/self-closing-comp': 'error',
 			'react/jsx-wrap-multilines': 'off',
-
-			// Next.js specific
 			'@next/next/no-img-element': 'warn',
 			'@next/next/no-html-link-for-pages': 'error',
 		},
@@ -206,10 +187,7 @@ const eslintConfig = [
 			'@typescript-eslint': (await import('@typescript-eslint/eslint-plugin')).default,
 		},
 		rules: {
-			// TypeScript-specific rules
 			'@typescript-eslint/no-var-requires': 'off',
-
-			// Turn off base rules in favor of TypeScript versions
 			'no-unused-vars': 'off',
 			'@typescript-eslint/no-unused-vars': [
 				'warn',
