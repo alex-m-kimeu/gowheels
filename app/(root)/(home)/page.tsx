@@ -4,7 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { searchSchema, type SearchFormData } from '@/lib/validations';
-import { Hero, WhyChooseUs, CarLogos, HowItWorks } from '@/components/home';
+import { Hero, WhyChooseUs, CarLogos, HowItWorks, PopularDeals } from '@/components/home';
 
 const Home = () => {
 	const form = useForm<SearchFormData>({
@@ -27,6 +27,7 @@ const Home = () => {
 			<WhyChooseUs />
 			<CarLogos />
 			<HowItWorks />
+			<PopularDeals />
 		</main>
 	);
 };

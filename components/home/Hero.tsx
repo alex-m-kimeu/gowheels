@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { UseFormReturn } from 'react-hook-form';
+import type { UseFormReturn } from 'react-hook-form';
 import { ROUTES } from '@/lib/constants';
 import { motion } from 'framer-motion';
 import {
@@ -27,7 +27,7 @@ import {
 } from '@/components/ui';
 import { CalendarDays, CarFront } from 'lucide-react';
 import { format } from 'date-fns';
-import { SearchFormData } from '@/lib/validations';
+import type { SearchFormData } from '@/lib/validations';
 import { carBrands } from '@/lib/constants';
 
 interface HeroProps {
@@ -187,35 +187,37 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 							variants={fadeIn}
 							transition={{ delay: 1.2 }}
 						>
-							<Link href={ROUTES.VEHICLES}>
-								<motion.div
-									whileHover={{ scale: 1.025 }}
-									whileTap={{ scale: 0.98 }}
-									transition={{
-										duration: 0.3,
-										type: 'tween',
-										stiffness: 300,
-										damping: 15,
-									}}
+							<motion.div
+								whileHover={{ scale: 1.025 }}
+								whileTap={{ scale: 0.98 }}
+								transition={{
+									duration: 0.3,
+									type: 'tween',
+									stiffness: 300,
+									damping: 15,
+								}}
+							>
+								<Link
+									href={ROUTES.VEHICLES}
+									className='inline-block text-[var(--white)] text-[16px] font-medium leading-[24px] font-poppins bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer'
 								>
-									<Button className='text-[var(--white)] text-[16px] font-medium leading-[24px] font-poppins bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer'>
-										Explore Fleet
-									</Button>
-								</motion.div>
-							</Link>
+									Explore Fleet
+								</Link>
+							</motion.div>
 							<span aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[25px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</span>
-							<Link href={ROUTES.ABOUT}>
-								<motion.div whileHover={{ scale: 1.025 }} transition={{ duration: 0.3 }}>
-									<Button className='text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-200 cursor-pointer'>
-										Why GoWheels?
-									</Button>
-								</motion.div>
-							</Link>
+							<motion.div whileHover={{ scale: 1.025 }} transition={{ duration: 0.3 }}>
+								<Link
+									href={ROUTES.ABOUT}
+									className='inline-block text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-200 cursor-pointer'
+								>
+									Why GoWheels?
+								</Link>
+							</motion.div>
 						</motion.nav>
 					</motion.div>
 
@@ -316,40 +318,42 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						</motion.ul>
 
 						<motion.nav
-							className='flex items-center gap-[16px] mt-[16px] lg:mt-[24px]'
+							className='flex items-center gap-[16px] mt-[24px]'
 							aria-label='Primary navigation'
 							variants={fadeIn}
 							transition={{ delay: 1.2 }}
 						>
-							<Link href={ROUTES.VEHICLES}>
-								<motion.div
-									whileHover={{ scale: 1.025 }}
-									whileTap={{ scale: 0.98 }}
-									transition={{
-										duration: 0.3,
-										type: 'tween',
-										stiffness: 300,
-										damping: 15,
-									}}
+							<motion.div
+								whileHover={{ scale: 1.025 }}
+								whileTap={{ scale: 0.98 }}
+								transition={{
+									duration: 0.3,
+									type: 'tween',
+									stiffness: 300,
+									damping: 15,
+								}}
+							>
+								<Link
+									href={ROUTES.VEHICLES}
+									className='inline-block text-[var(--white)] text-[16px] font-medium leading-[24px] font-poppins bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer'
 								>
-									<Button className='text-[var(--white)] text-[16px] font-medium leading-[24px] font-poppins bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer'>
-										Explore Fleet
-									</Button>
-								</motion.div>
-							</Link>
+									Explore Fleet
+								</Link>
+							</motion.div>
 							<span aria-hidden='true' role='presentation'>
 								<Separator
 									orientation='vertical'
 									className='!h-[25px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</span>
-							<Link href={ROUTES.ABOUT}>
-								<motion.div whileHover={{ scale: 1.025 }} transition={{ duration: 0.3 }}>
-									<Button className='text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-200 cursor-pointer'>
-										Why GoWheels?
-									</Button>
-								</motion.div>
-							</Link>
+							<motion.div whileHover={{ scale: 1.025 }} transition={{ duration: 0.3 }}>
+								<Link
+									href={ROUTES.ABOUT}
+									className='inline-block text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-200 cursor-pointer'
+								>
+									Why GoWheels?
+								</Link>
+							</motion.div>
 						</motion.nav>
 					</motion.div>
 
@@ -438,9 +442,9 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 													<SelectTrigger
 														id='car-brand-select'
 														className={`w-full font-poppins text-[14px] font-normal leading-[20px] border-[1px] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent p-[8px_12px] rounded-[4px] cursor-pointer ${
-															!field.value ?
-																'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)] focus:border-[var(--neutral-dividers)]'
-															:	'text-[var(--primary-light)] border-[var(--primary-extra-light)] focus:border-[var(--primary-extra-light)]'
+															field.value ?
+																'text-[var(--primary-light)] border-[var(--primary-extra-light)] focus:border-[var(--primary-extra-light)]'
+															:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)] focus:border-[var(--neutral-dividers)]'
 														}`}
 														aria-label='Select car brand'
 														aria-describedby={field.value ? undefined : 'brand-help'}
@@ -520,9 +524,9 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 														<Button
 															id='pickup-date-button'
 															className={`text-[14px] font-normal leading-[20px] font-poppins bg-transparent cursor-pointer w-full border-[1px] border-[var(--neutral-dividers)] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent focus-visible:!border-transparent p-[8px_12px] justify-start rounded-[4px] ${
-																!field.value ?
-																	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)]'
-																:	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
+																field.value ?
+																	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
+																:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)]'
 															}`}
 															aria-haspopup='dialog'
 															aria-expanded={false}
@@ -549,6 +553,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 														disabled={(date) => {
 															const today = new Date();
 															today.setHours(0, 0, 0, 0);
+
 															return date < today;
 														}}
 														initialFocus
@@ -601,9 +606,9 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 														<Button
 															id='return-date-button'
 															className={`text-[14px] font-normal leading-[20px] font-poppins bg-transparent cursor-pointer w-full border-[1px] border-[var(--neutral-dividers)] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent focus-visible:!border-transparent p-[8px_12px] justify-start rounded-[4px] ${
-																!field.value ?
-																	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)]'
-																:	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
+																field.value ?
+																	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
+																:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)]'
 															}`}
 															aria-haspopup='dialog'
 															aria-expanded={false}
@@ -630,6 +635,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 														disabled={(date) => {
 															const today = new Date();
 															today.setHours(0, 0, 0, 0);
+
 															return date < today;
 														}}
 														initialFocus

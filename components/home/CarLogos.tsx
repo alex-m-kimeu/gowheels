@@ -3,47 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { CAR_LOGOS } from '@/lib/constants';
 
-const carLogos = [
-	{
-		src: '/icons/Toyota.svg',
-		alt: 'Toyota logo',
-		width: 82,
-		height: 54,
-	},
-	{
-		src: '/icons/Ford.svg',
-		alt: 'Ford logo',
-		width: 115,
-		height: 44,
-	},
-	{
-		src: '/icons/Mercedes.svg',
-		alt: 'Mercedes logo',
-		width: 55,
-		height: 54,
-	},
-	{
-		src: '/icons/Jeep.svg',
-		alt: 'Jeep logo',
-		width: 109,
-		height: 44,
-	},
-	{
-		src: '/icons/Bmw.svg',
-		alt: 'BMW logo',
-		width: 55,
-		height: 54,
-	},
-	{
-		src: '/icons/Audi.svg',
-		alt: 'Audi logo',
-		width: 124,
-		height: 42,
-	},
-];
-
-// Animation variants
 const staggerContainer = {
 	hidden: { opacity: 0 },
 	visible: {
@@ -97,7 +58,7 @@ export const CarLogos = () => {
 				Our Partner Car Brands
 			</motion.h2>
 			<motion.ul className='contents' variants={staggerContainer}>
-				{carLogos.map((logo) => (
+				{CAR_LOGOS.map((logo) => (
 					<motion.li
 						key={logo.src}
 						className='flex items-center justify-center w-[60px] h-[40px] sm:w-[80px] sm:h-[50px] md:w-[100px] md:h-[60px] lg:w-auto lg:h-auto'
