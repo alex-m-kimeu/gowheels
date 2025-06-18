@@ -72,24 +72,6 @@ const featureItem = {
 	},
 };
 
-const calendarClassNames = {
-	caption_label: 'text-[14px] font-medium text-[var(--primary)] leading-[20px] font-poppins py-2',
-	nav_button_previous: 'text-[var(--neutral-strong-text)] !border-none !shadow-none !p-0 absolute left-1',
-	nav_button_next: 'text-[var(--neutral-strong-text)] !border-none !shadow-none !p-0 absolute right-1',
-	months: 'w-full',
-	month: 'w-full space-y-2',
-	table: 'w-full border-collapse',
-	row: 'flex w-full my-1',
-	head_cell:
-		'text-center py-2 text-[var(--neutral-strong-text)] text-[14px] font-medium leading-[20px] font-poppins w-[calc(100%/7)]',
-	cell: 'p-0 text-center font-poppins w-[calc(100%/7)] py-1',
-	day: 'mx-auto size-9 p-0 font-normal flex items-center justify-center text-[var(--neutral-headings)]',
-	day_selected:
-		'bg-[var(--primary)] text-[var(--white)] hover:bg-[var(--primary-light)] hover:text-[var(--white)] rounded-[4px]',
-	day_today: 'bg-[var(--primary)] text-[var(--white)] rounded-[50%]',
-	day_disabled: '!text-[var(--neutral-body-text)] opacity-50',
-};
-
 export const Hero = ({ form, onSubmit }: HeroProps) => {
 	return (
 		<motion.section
@@ -538,28 +520,27 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 												</FormControl>
 											</PopoverTrigger>
 											<PopoverContent
-												className='w-[var(--radix-popover-trigger-width)] p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
+												className='w-auto p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
 												align='start'
 												sideOffset={10}
 												side='bottom'
 												role='dialog'
 												aria-label='Calendar picker for pickup date'
 											>
-												<div>
-													<Calendar
-														mode='single'
-														selected={field.value}
-														onSelect={field.onChange}
-														disabled={(date) => {
-															const today = new Date();
-															today.setHours(0, 0, 0, 0);
+												<Calendar
+													mode='single'
+													selected={field.value}
+													onSelect={field.onChange}
+													captionLayout='dropdown'
+													disabled={(date) => {
+														const today = new Date();
+														today.setHours(0, 0, 0, 0);
 
-															return date < today;
-														}}
-														initialFocus
-														classNames={calendarClassNames}
-													/>
-												</div>
+														return date < today;
+													}}
+													autoFocus
+													className='w-full border-0 bg-[var(--neutral-surface)] p-3 [&_.rdp-month_caption]:text-[var(--neutral-strong-text)] [&_.rdp-month_caption]:font-poppins [&_.rdp-month_caption]:text-[14px] [&_.rdp-month_caption]:font-medium [&_.rdp-weekday]:text-[var(--neutral-body-text)] [&_.rdp-weekday]:font-poppins [&_.rdp-weekday]:text-[12px] [&_.rdp-weekday]:font-normal [&_.rdp-day]:text-[var(--neutral-strong-text)] [&_.rdp-day]:font-poppins [&_.rdp-day]:text-[14px] [&_.rdp-day]:font-normal [&_.rdp-day:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-day:hover]:text-[var(--neutral-emphasis-text)] [&_.rdp-day[data-selected-single=true]]:bg-[var(--primary)] [&_.rdp-day[data-selected-single=true]]:text-[var(--white)] [&_.rdp-day[data-today=true]]:bg-[var(--neutral-extra-light)] [&_.rdp-day[data-today=true]]:text-[var(--neutral-emphasis-text)] [&_.rdp-nav-button]:border [&_.rdp-nav-button]:border-[var(--neutral-dividers)] [&_.rdp-nav-button]:text-[var(--neutral-strong-text)] [&_.rdp-nav-button:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-dropdown]:border [&_.rdp-dropdown]:border-[var(--neutral-dividers)] [&_.rdp-dropdown]:bg-[var(--neutral-surface)] [&_.rdp-dropdown]:text-[var(--neutral-strong-text)] [&_.rdp-dropdown]:font-poppins [&_.rdp-dropdown]:text-[14px] [&_.rdp-dropdown]:rounded-[4px]'
+												/>
 											</PopoverContent>
 										</Popover>
 										<FormMessage className='text-[14px] leading-[20px] font-poppins font-normal text-[var(--error)]' />
@@ -620,28 +601,27 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 												</FormControl>
 											</PopoverTrigger>
 											<PopoverContent
-												className='w-[var(--radix-popover-trigger-width)] p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
+												className='w-auto p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
 												align='start'
 												sideOffset={10}
 												side='bottom'
 												role='dialog'
 												aria-label='Calendar picker for return date'
 											>
-												<div>
-													<Calendar
-														mode='single'
-														selected={field.value}
-														onSelect={field.onChange}
-														disabled={(date) => {
-															const today = new Date();
-															today.setHours(0, 0, 0, 0);
+												<Calendar
+													mode='single'
+													selected={field.value}
+													onSelect={field.onChange}
+													captionLayout='dropdown'
+													disabled={(date) => {
+														const today = new Date();
+														today.setHours(0, 0, 0, 0);
 
-															return date < today;
-														}}
-														initialFocus
-														classNames={calendarClassNames}
-													/>
-												</div>
+														return date < today;
+													}}
+													autoFocus
+													className='w-full border-0 bg-[var(--neutral-surface)] p-3 [&_.rdp-month_caption]:text-[var(--neutral-strong-text)] [&_.rdp-month_caption]:font-poppins [&_.rdp-month_caption]:text-[14px] [&_.rdp-month_caption]:font-medium [&_.rdp-weekday]:text-[var(--neutral-body-text)] [&_.rdp-weekday]:font-poppins [&_.rdp-weekday]:text-[12px] [&_.rdp-weekday]:font-normal [&_.rdp-day]:text-[var(--neutral-strong-text)] [&_.rdp-day]:font-poppins [&_.rdp-day]:text-[14px] [&_.rdp-day]:font-normal [&_.rdp-day:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-day:hover]:text-[var(--neutral-emphasis-text)] [&_.rdp-day[data-selected-single=true]]:bg-[var(--primary)] [&_.rdp-day[data-selected-single=true]]:text-[var(--white)] [&_.rdp-day[data-today=true]]:bg-[var(--neutral-extra-light)] [&_.rdp-day[data-today=true]]:text-[var(--neutral-emphasis-text)] [&_.rdp-nav-button]:border [&_.rdp-nav-button]:border-[var(--neutral-dividers)] [&_.rdp-nav-button]:text-[var(--neutral-strong-text)] [&_.rdp-nav-button:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-dropdown]:border [&_.rdp-dropdown]:border-[var(--neutral-dividers)] [&_.rdp-dropdown]:bg-[var(--neutral-surface)] [&_.rdp-dropdown]:text-[var(--neutral-strong-text)] [&_.rdp-dropdown]:font-poppins [&_.rdp-dropdown]:text-[14px] [&_.rdp-dropdown]:rounded-[4px]'
+												/>
 											</PopoverContent>
 										</Popover>
 										<FormMessage className='text-[14px] leading-[20px] font-poppins font-normal text-[var(--error)]' />
