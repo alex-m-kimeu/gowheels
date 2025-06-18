@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Poppins } from 'next/font/google';
 import '../styles/globals.css';

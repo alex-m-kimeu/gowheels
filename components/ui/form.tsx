@@ -1,3 +1,4 @@
+/* eslint-disable no-negated-condition */
 'use client';
 
 import * as React from 'react';

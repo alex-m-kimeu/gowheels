@@ -17,6 +17,7 @@ const Home = () => {
 	});
 
 	const onSubmit = (data: SearchFormData) => {
+		// eslint-disable-next-line no-console
 		console.log('Search Data:', data);
 		// handle search logic
 	};
