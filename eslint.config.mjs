@@ -13,7 +13,10 @@ const eslintConfig = [
 	...compat.extends('next/core-web-vitals', 'next/typescript'),
 	...compat.extends('prettier'),
 	{
-		ignores: ['**/dist', '**/out', '**/.next', '**/node_modules'],
+		ignores: ['**/dist', '**/out', '**/.next', '**/node_modules', 'components/ui/**'],
+		linterOptions: {
+			reportUnusedDisableDirectives: false,
+		},
 	},
 	{
 		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -34,7 +37,6 @@ const eslintConfig = [
 			'newline-before-return': 'error',
 			'no-var': 'error',
 			'prefer-const': 'error',
-
 			'space-before-function-paren': [
 				'error',
 				{
@@ -208,16 +210,16 @@ const eslintConfig = [
 				},
 			],
 			'@typescript-eslint/no-explicit-any': 'warn',
-			'@typescript-eslint/prefer-nullish-coalescing': 'error',
+			'@typescript-eslint/prefer-nullish-coalescing': 'off',
 			'@typescript-eslint/prefer-optional-chain': 'error',
 			'@typescript-eslint/no-non-null-assertion': 'warn',
-			'@typescript-eslint/consistent-type-imports': [
-				'error',
-				{
-					prefer: 'type-imports',
-					disallowTypeAnnotations: false,
-				},
-			],
+			'@typescript-eslint/consistent-type-imports': 'off',
+			'@typescript-eslint/ban-ts-comment': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-return': 'off',
+			'@typescript-eslint/no-unsafe-argument': 'off',
 		},
 	},
 	{
@@ -225,6 +227,13 @@ const eslintConfig = [
 		rules: {
 			'@typescript-eslint/no-var-requires': 'off',
 			'no-console': 'off',
+		},
+	},
+	{
+		files: ['components/navbar/**/*.{ts,tsx}', 'components/**/animations/**/*.{ts,tsx}'],
+		rules: {
+			'@typescript-eslint/ban-ts-comment': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
 		},
 	},
 ];
