@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  firstName       String
+  lastName        String
+  password        String
+  roleType        RoleType @default(CUSTOMER)
+  isEmailVerified Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relation to email verification
+  emailVerifications EmailVerification[]
+
+  // Indexes
+  @@index([roleType])
+  @@index([isEmailVerified])
+  @@index([createdAt])
+}
+
+// EmailVerificationToken model
+model EmailVerification {
+  id         String    @id @default(cuid())
+  userId     String
+  otp        String?
+  expiresAt  DateTime?
+  createdAt  DateTime?
+  verifiedAt DateTime?
+
+  // Relation to user
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([userId])
+  @@index([otp])
+  @@index([expiresAt])
+  @@index([userId, otp])
+  @@index([expiresAt, otp])
+}
+
+// Enum for user roles
+enum RoleType {
+  CUSTOMER
+  ADMIN
+}
