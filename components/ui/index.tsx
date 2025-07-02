@@ -6,3 +6,5 @@ export * from './label';
 export * from './calendar';
 export * from './popover';
 export * from './select';
+export * from './dialog';
+export * from './command';

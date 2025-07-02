@@ -29,7 +29,7 @@ const stagger = {
 	visible: {
 		opacity: 1,
 		transition: {
-			staggerChildren: 0.15,
+			staggerChildren: 0.2,
 			delayChildren: 0.1,
 			duration: 0.8,
 			ease: [0.25, 0.1, 0.25, 1],
@@ -79,15 +79,17 @@ export const PopularDeals: React.FC = () => {
 
 			{/* Car Cards */}
 			<motion.div
-				className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-[20px] lg:gap-x-[24px] xl:gap-x-[28px] gap-y-[24px] md:gap-y-[32px] xl:gap-y-[40px] w-full'
+				className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-[20px] lg:gap-x-[24px] xl:gap-x-[28px] gap-y-[24px] md:gap-y-[32px] w-full'
 				role='region'
 				aria-label='Available car rental deals'
 				variants={stagger}
 			>
 				{POPULAR_CARS.map((car, index) => (
-					<motion.div key={car.id} variants={index === 0 ? fadeInFast : fadeIn}>
-						<CarCard {...car} aria-label={`Car ${index + 1} of ${POPULAR_CARS.length}: ${car.name}`} />
-					</motion.div>
+					<CarCard
+						key={car.id}
+						{...car}
+						aria-label={`Car ${index + 1} of ${POPULAR_CARS.length}: ${car.name}`}
+					/>
 				))}
 			</motion.div>
 

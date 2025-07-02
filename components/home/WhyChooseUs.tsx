@@ -118,7 +118,7 @@ export const WhyChooseUs: React.FC = () => {
 					variants={fadeIn}
 					aria-label='Section category'
 				>
-					Why Choose Us
+					Why Choose GoWheels?
 				</motion.p>
 				<motion.h2
 					className='t-style-h2 text-[var(--neutral-headings)] text-center'
@@ -160,12 +160,8 @@ export const WhyChooseUs: React.FC = () => {
 							}}
 							role='listitem'
 						>
-							<motion.div
+							<div
 								className='flex size-[64px] flex-col justify-center items-center rounded-[16px] bg-[var(--primary-extra-light)]'
-								whileHover={{
-									scale: 1.1,
-									transition: { duration: 0.3, ease: 'easeInOut' },
-								}}
 								aria-hidden='true'
 							>
 								<div className='w-[24px] h-[24px]'>
@@ -179,7 +175,7 @@ export const WhyChooseUs: React.FC = () => {
 										aria-hidden='true'
 									/>
 								</div>
-							</motion.div>
+							</div>
 
 							<div className='flex flex-col items-start md:items-center xl:items-start gap-[8px] flex-1'>
 								<h3 className='t-style-subtitle text-[var(--neutral-headings)] text-start md:text-center xl:text-start'>
@@ -236,12 +232,8 @@ export const WhyChooseUs: React.FC = () => {
 							}}
 							role='listitem'
 						>
-							<motion.div
+							<div
 								className='flex size-[64px] flex-col justify-center items-center rounded-[16px] bg-[var(--primary-extra-light)]'
-								whileHover={{
-									scale: 1.1,
-									transition: { duration: 0.3, ease: 'easeInOut' },
-								}}
 								aria-hidden='true'
 							>
 								<div className='w-[24px] h-[24px]'>
@@ -255,7 +247,7 @@ export const WhyChooseUs: React.FC = () => {
 										aria-hidden='true'
 									/>
 								</div>
-							</motion.div>
+							</div>
 
 							<div className='flex flex-col items-start md:items-center xl:items-start gap-[8px] flex-1'>
 								<h3 className='t-style-subtitle text-[var(--neutral-headings)] text-start md:text-center xl:text-start'>

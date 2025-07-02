@@ -6,13 +6,13 @@ import { motion } from 'framer-motion';
 
 // Animation variants
 const fadeIn = {
-	hidden: { opacity: 0, translateY: '20px' },
+	hidden: { opacity: 0, y: 20 },
 	visible: {
 		opacity: 1,
-		translateY: '0px',
+		y: 0,
 		transition: {
-			duration: 0.7,
-			ease: 'easeOut',
+			duration: 0.8,
+			ease: [0.25, 0.1, 0.25, 1],
 		},
 	},
 };
@@ -22,46 +22,58 @@ const staggerContainer = {
 	visible: {
 		opacity: 1,
 		transition: {
-			delayChildren: 0.2,
-			staggerChildren: 0.15,
-			duration: 0.5,
-			ease: 'easeOut',
+			delayChildren: 0.1,
+			staggerChildren: 0.2,
+			duration: 0.6,
+			ease: [0.25, 0.1, 0.25, 1],
 		},
 	},
 };
 
 const stepCard = {
-	hidden: { opacity: 0, translateY: '30px' },
+	hidden: { opacity: 0, y: 40, scale: 0.95 },
 	visible: {
 		opacity: 1,
-		translateY: '0px',
+		y: 0,
+		scale: 1,
 		transition: {
-			duration: 0.6,
-			ease: 'easeOut',
+			duration: 0.8,
+			ease: [0.25, 0.1, 0.25, 1],
+			type: 'spring',
+			stiffness: 120,
+			damping: 15,
 		},
 	},
 };
 
 const stepItemLeft = {
-	hidden: { opacity: 0, translateX: '-30px' },
+	hidden: { opacity: 0, x: -50, scale: 0.9 },
 	visible: {
 		opacity: 1,
-		translateX: '0px',
+		x: 0,
+		scale: 1,
 		transition: {
-			duration: 0.6,
-			ease: 'easeOut',
+			duration: 0.9,
+			ease: [0.25, 0.1, 0.25, 1],
+			type: 'spring',
+			stiffness: 100,
+			damping: 20,
 		},
 	},
 };
 
 const stepItemRight = {
-	hidden: { opacity: 0, translateX: '30px' },
+	hidden: { opacity: 0, x: 50, scale: 0.9 },
 	visible: {
 		opacity: 1,
-		translateX: '0px',
+		x: 0,
+		scale: 1,
 		transition: {
-			duration: 0.6,
-			ease: 'easeOut',
+			duration: 0.9,
+			ease: [0.25, 0.1, 0.25, 1],
+			type: 'spring',
+			stiffness: 100,
+			damping: 20,
 		},
 	},
 };
@@ -72,9 +84,12 @@ const timelineVariant = {
 		opacity: 1,
 		scaleY: 1,
 		transition: {
-			duration: 1.2,
-			delay: 0.3,
-			ease: 'easeOut',
+			duration: 1.5,
+			delay: 0.2,
+			ease: [0.25, 0.1, 0.25, 1],
+			type: 'spring',
+			stiffness: 80,
+			damping: 25,
 		},
 	},
 };
@@ -129,16 +144,30 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepCard}
 					whileHover={{
-						translateY: '-5px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						y: -8,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 300,
+							damping: 20,
+						},
 					}}
 				>
 					<motion.div
 						className='w-[60px] h-[60px] flex-shrink-0'
 						aria-hidden='true'
 						whileHover={{
-							scale: 1.1,
-							transition: { duration: 0.3, ease: 'easeInOut' },
+							scale: 1.08,
+							rotate: 5,
+							transition: {
+								duration: 0.3,
+								ease: [0.25, 0.1, 0.25, 1],
+								type: 'spring',
+								stiffness: 400,
+								damping: 15,
+							},
 						}}
 					>
 						<Image
@@ -163,16 +192,30 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepCard}
 					whileHover={{
-						translateY: '-5px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						y: -8,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 300,
+							damping: 20,
+						},
 					}}
 				>
 					<motion.div
 						className='w-[60px] h-[60px] flex-shrink-0'
 						aria-hidden='true'
 						whileHover={{
-							scale: 1.1,
-							transition: { duration: 0.3, ease: 'easeInOut' },
+							scale: 1.08,
+							rotate: 5,
+							transition: {
+								duration: 0.3,
+								ease: [0.25, 0.1, 0.25, 1],
+								type: 'spring',
+								stiffness: 400,
+								damping: 15,
+							},
 						}}
 					>
 						<Image
@@ -197,16 +240,30 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepCard}
 					whileHover={{
-						translateY: '-5px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						y: -8,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 300,
+							damping: 20,
+						},
 					}}
 				>
 					<motion.div
 						className='w-[60px] h-[60px] flex-shrink-0'
 						aria-hidden='true'
 						whileHover={{
-							scale: 1.1,
-							transition: { duration: 0.3, ease: 'easeInOut' },
+							scale: 1.08,
+							rotate: 5,
+							transition: {
+								duration: 0.3,
+								ease: [0.25, 0.1, 0.25, 1],
+								type: 'spring',
+								stiffness: 400,
+								damping: 15,
+							},
 						}}
 					>
 						<Image
@@ -231,16 +288,30 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepCard}
 					whileHover={{
-						translateY: '-5px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						y: -8,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 300,
+							damping: 20,
+						},
 					}}
 				>
 					<motion.div
 						className='w-[60px] h-[60px] flex-shrink-0'
 						aria-hidden='true'
 						whileHover={{
-							scale: 1.1,
-							transition: { duration: 0.3, ease: 'easeInOut' },
+							scale: 1.08,
+							rotate: 5,
+							transition: {
+								duration: 0.3,
+								ease: [0.25, 0.1, 0.25, 1],
+								type: 'spring',
+								stiffness: 400,
+								damping: 15,
+							},
 						}}
 					>
 						<Image
@@ -283,8 +354,15 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepItemLeft}
 					whileHover={{
-						translateX: '10px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						x: 15,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 200,
+							damping: 20,
+						},
 					}}
 				>
 					<div className='flex p-[32px_24px] justify-center items-center gap-[24px] xl:gap-[32px] relative z-10 w-1/2'>
@@ -299,7 +377,14 @@ export const HowItWorks = () => {
 							aria-hidden='true'
 							whileHover={{
 								scale: 1.1,
-								transition: { duration: 0.3, ease: 'easeInOut' },
+								rotate: 8,
+								transition: {
+									duration: 0.3,
+									ease: [0.25, 0.1, 0.25, 1],
+									type: 'spring',
+									stiffness: 400,
+									damping: 15,
+								},
 							}}
 						>
 							<Image
@@ -319,8 +404,15 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepItemRight}
 					whileHover={{
-						translateX: '-10px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						x: -15,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 200,
+							damping: 20,
+						},
 					}}
 				>
 					<div className='w-1/2' />
@@ -330,7 +422,14 @@ export const HowItWorks = () => {
 							aria-hidden='true'
 							whileHover={{
 								scale: 1.1,
-								transition: { duration: 0.3, ease: 'easeInOut' },
+								rotate: -8,
+								transition: {
+									duration: 0.3,
+									ease: [0.25, 0.1, 0.25, 1],
+									type: 'spring',
+									stiffness: 400,
+									damping: 15,
+								},
 							}}
 						>
 							<Image
@@ -355,8 +454,15 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepItemLeft}
 					whileHover={{
-						translateX: '10px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						x: 15,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 200,
+							damping: 20,
+						},
 					}}
 				>
 					<div className='flex p-[32px_24px] justify-center items-center gap-[24px] xl:gap-[32px] relative z-10 w-1/2'>
@@ -371,7 +477,14 @@ export const HowItWorks = () => {
 							aria-hidden='true'
 							whileHover={{
 								scale: 1.1,
-								transition: { duration: 0.3, ease: 'easeInOut' },
+								rotate: 8,
+								transition: {
+									duration: 0.3,
+									ease: [0.25, 0.1, 0.25, 1],
+									type: 'spring',
+									stiffness: 400,
+									damping: 15,
+								},
 							}}
 						>
 							<Image
@@ -391,8 +504,15 @@ export const HowItWorks = () => {
 					role='listitem'
 					variants={stepItemRight}
 					whileHover={{
-						translateX: '-10px',
-						transition: { duration: 0.3, ease: 'easeInOut' },
+						x: -15,
+						scale: 1.02,
+						transition: {
+							duration: 0.4,
+							ease: [0.25, 0.1, 0.25, 1],
+							type: 'spring',
+							stiffness: 200,
+							damping: 20,
+						},
 					}}
 				>
 					<div className='w-1/2' />
@@ -402,7 +522,14 @@ export const HowItWorks = () => {
 							aria-hidden='true'
 							whileHover={{
 								scale: 1.1,
-								transition: { duration: 0.3, ease: 'easeInOut' },
+								rotate: -8,
+								transition: {
+									duration: 0.3,
+									ease: [0.25, 0.1, 0.25, 1],
+									type: 'spring',
+									stiffness: 400,
+									damping: 15,
+								},
 							}}
 						>
 							<Image

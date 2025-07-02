@@ -19,13 +19,14 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 	Calendar,
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
 } from '@/components/ui';
-import { CalendarDays, CarFront } from 'lucide-react';
+import { CalendarDays, CarFront, ChevronDown } from 'lucide-react';
 import { format } from 'date-fns';
 import type { SearchFormData } from '@/lib/validations';
 import { carBrands } from '@/lib/constants';
@@ -36,13 +37,13 @@ interface HeroProps {
 }
 
 const fadeIn = {
-	hidden: { opacity: 0, translateY: '20px' },
+	hidden: { opacity: 0, translateY: '30px' },
 	visible: {
 		opacity: 1,
 		translateY: '0px',
 		transition: {
-			duration: 0.7,
-			ease: 'easeOut',
+			duration: 1.2,
+			ease: [0.25, 0.1, 0.25, 1],
 		},
 	},
 };
@@ -52,35 +53,95 @@ const staggerContainer = {
 	visible: {
 		opacity: 1,
 		transition: {
-			delayChildren: 0.3,
-			staggerChildren: 0.25,
-			duration: 0.5,
-			ease: 'easeOut',
+			delayChildren: 0.2,
+			staggerChildren: 0.1,
+			duration: 0.6,
+			ease: [0.25, 0.1, 0.25, 1],
 		},
 	},
 };
 
 const featureItem = {
-	hidden: { opacity: 0, translateX: '-10px' },
+	hidden: { opacity: 0, translateX: '-20px' },
 	visible: {
 		opacity: 1,
 		translateX: '0px',
 		transition: {
+			duration: 0.8,
+			ease: [0.25, 0.1, 0.25, 1],
+		},
+	},
+};
+
+const mobileStaggerContainer = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			delayChildren: 0.1,
+			staggerChildren: 0.08,
 			duration: 0.5,
-			ease: 'easeOut',
+			ease: [0.25, 0.1, 0.25, 1],
+		},
+	},
+};
+
+const mobileFadeIn = {
+	hidden: { opacity: 0, translateY: '20px' },
+	visible: {
+		opacity: 1,
+		translateY: '0px',
+		transition: {
+			duration: 0.8,
+			ease: [0.25, 0.1, 0.25, 1],
+		},
+	},
+};
+
+const mobileSlideIn = {
+	hidden: { opacity: 0, translateX: '-15px' },
+	visible: {
+		opacity: 1,
+		translateX: '0px',
+		transition: {
+			duration: 0.6,
+			ease: [0.25, 0.1, 0.25, 1],
 		},
 	},
 };
 
 export const Hero = ({ form, onSubmit }: HeroProps) => {
+	const [open, setOpen] = React.useState(false);
+	const triggerRef = React.useRef<HTMLButtonElement>(null);
+	const [contentWidth, setContentWidth] = React.useState<string | number>('auto');
+
+	React.useEffect(() => {
+		if (triggerRef.current) {
+			setContentWidth(triggerRef.current.offsetWidth);
+		}
+	}, [open]);
+
+	React.useEffect(() => {
+		const updateWidth = () => {
+			if (triggerRef.current) {
+				setContentWidth(triggerRef.current.offsetWidth);
+			}
+		};
+
+		updateWidth();
+		window.addEventListener('resize', updateWidth);
+
+		return () => window.removeEventListener('resize', updateWidth);
+	}, []);
+
 	return (
 		<motion.section
 			className='relative w-full mb-[350px] md:mb-[350px] lg:mb-[180px] xl:mb-[100px]'
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{
-				duration: 0.8,
-				ease: 'easeInOut',
+				duration: 1.0,
+				ease: [0.25, 0.1, 0.25, 1],
 			}}
 			aria-label='Hero section with car rental search'
 		>
@@ -112,7 +173,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 							variants={staggerContainer}
 							initial='hidden'
 							animate='visible'
-							transition={{ delayChildren: 0.8 }}
+							transition={{ delayChildren: 0.6 }}
 							role='list'
 							aria-label='Key features'
 						>
@@ -167,16 +228,16 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 							className='flex items-center gap-[16px] mt-[24px]'
 							aria-label='Primary navigation'
 							variants={fadeIn}
-							transition={{ delay: 1.2 }}
+							transition={{ delay: 1.0 }}
 						>
 							<motion.div
-								whileHover={{ scale: 1.025 }}
+								whileHover={{ scale: 1.02 }}
 								whileTap={{ scale: 0.98 }}
 								transition={{
-									duration: 0.3,
-									type: 'tween',
-									stiffness: 300,
-									damping: 15,
+									duration: 0.4,
+									type: 'spring',
+									stiffness: 200,
+									damping: 20,
 								}}
 							>
 								<Link
@@ -192,7 +253,10 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									className='!h-[25px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</span>
-							<motion.div whileHover={{ scale: 1.025 }} transition={{ duration: 0.3 }}>
+							<motion.div
+								whileHover={{ scale: 1.02 }}
+								transition={{ duration: 0.4, type: 'spring', stiffness: 200, damping: 20 }}
+							>
 								<Link
 									href={ROUTES.ABOUT}
 									className='inline-block text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-200 cursor-pointer'
@@ -209,11 +273,11 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 							initial={{ opacity: 0, translateX: '50px' }}
 							animate={{ opacity: 1, translateX: '0px' }}
 							transition={{
-								duration: 1.2,
-								delay: 0.6,
+								duration: 1.4,
+								delay: 0.5,
 								type: 'spring',
-								bounce: 0.3,
-								damping: 12,
+								bounce: 0.15,
+								damping: 20,
 							}}
 							style={{ willChange: 'transform' }}
 						>
@@ -233,20 +297,20 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 				<div className='w-full flex flex-col lg:flex-row xl:hidden items-center justify-between mx-auto gap-[24px] lg:gap-[16px]'>
 					<motion.div
 						className='flex flex-col items-center lg:items-start gap-[16px] lg:gap-[24px] shrink-0 w-full lg:w-[400px]'
-						variants={staggerContainer}
+						variants={mobileStaggerContainer}
 						initial='hidden'
 						animate='visible'
 					>
 						<motion.h1
 							className='self-stretch text-[var(--neutral-emphasis-text)] t-style-h1 text-center lg:text-start'
-							variants={fadeIn}
+							variants={mobileFadeIn}
 						>
 							Hit the Road in Style
 						</motion.h1>
 
 						<motion.p
 							className='self-stretch text-[var(--neutral-strong-text)] t-style-body text-center lg:text-start'
-							variants={fadeIn}
+							variants={mobileFadeIn}
 						>
 							Drive your dream car with GoWheels — where luxury meets freedom. From weekend getaways to
 							business travel, we&apos;ve got the perfect ride waiting.
@@ -254,14 +318,14 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 
 						<motion.ul
 							className='flex flex-wrap items-center justify-center lg:justify-start gap-[8px] list-none p-0 m-0'
-							variants={staggerContainer}
+							variants={mobileStaggerContainer}
 							initial='hidden'
 							animate='visible'
-							transition={{ delayChildren: 0.8 }}
+							transition={{ delayChildren: 0.4 }}
 							role='list'
 							aria-label='Key features'
 						>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
+							<motion.li className='flex items-center gap-[4px]' variants={mobileSlideIn} role='listitem'>
 								<span className='flex items-center justify-center t-style-caption' aria-hidden='true'>
 									🚘
 								</span>
@@ -275,7 +339,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									className='!h-[20px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</li>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
+							<motion.li className='flex items-center gap-[4px]' variants={mobileSlideIn} role='listitem'>
 								<span className='flex items-center justify-center t-style-caption' aria-hidden='true'>
 									🕒
 								</span>
@@ -289,7 +353,7 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									className='!h-[20px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</li>
-							<motion.li className='flex items-center gap-[4px]' variants={featureItem} role='listitem'>
+							<motion.li className='flex items-center gap-[4px]' variants={mobileSlideIn} role='listitem'>
 								<span className='flex items-center justify-center t-style-caption' aria-hidden='true'>
 									💼
 								</span>
@@ -302,22 +366,22 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 						<motion.nav
 							className='flex items-center gap-[16px] mt-[24px]'
 							aria-label='Primary navigation'
-							variants={fadeIn}
-							transition={{ delay: 1.2 }}
+							variants={mobileFadeIn}
+							transition={{ delay: 0.8 }}
 						>
 							<motion.div
-								whileHover={{ scale: 1.025 }}
-								whileTap={{ scale: 0.98 }}
+								whileHover={{ scale: 1.01 }}
+								whileTap={{ scale: 0.99 }}
 								transition={{
-									duration: 0.3,
-									type: 'tween',
-									stiffness: 300,
-									damping: 15,
+									duration: 0.2,
+									type: 'spring',
+									stiffness: 400,
+									damping: 25,
 								}}
 							>
 								<Link
 									href={ROUTES.VEHICLES}
-									className='inline-block text-[var(--white)] text-[16px] font-medium leading-[24px] font-poppins bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer'
+									className='inline-block text-[var(--white)] text-[16px] font-medium leading-[24px] font-poppins bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-150 cursor-pointer'
 								>
 									Explore Fleet
 								</Link>
@@ -328,10 +392,13 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 									className='!h-[25px] !w-[2px] !bg-[var(--neutral-body-text)]'
 								/>
 							</span>
-							<motion.div whileHover={{ scale: 1.025 }} transition={{ duration: 0.3 }}>
+							<motion.div
+								whileHover={{ scale: 1.01 }}
+								transition={{ duration: 0.2, type: 'spring', stiffness: 400, damping: 25 }}
+							>
 								<Link
 									href={ROUTES.ABOUT}
-									className='inline-block text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-200 cursor-pointer'
+									className='inline-block text-[var(--primary)] text-[16px] font-medium leading-[24px] font-poppins bg-transparent border-none outline-none shadow-none rounded-none px-0 py-0 hover:underline underline-offset-[4px] transition-colors duration-150 cursor-pointer'
 								>
 									Why GoWheels?
 								</Link>
@@ -342,14 +409,14 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 					<div className='overflow-hidden flex justify-center lg:justify-end items-center lg:items-end w-full'>
 						<motion.figure
 							className='m-0 w-full'
-							initial={{ opacity: 0, translateX: '50px' }}
-							animate={{ opacity: 1, translateX: '0px' }}
+							initial={{ opacity: 0, scale: 0.95 }}
+							animate={{ opacity: 1, scale: 1 }}
 							transition={{
-								duration: 1.2,
-								delay: 0.6,
+								duration: 1.0,
+								delay: 0.3,
 								type: 'spring',
-								bounce: 0.3,
-								damping: 12,
+								stiffness: 100,
+								damping: 20,
 							}}
 							style={{ willChange: 'transform' }}
 						>
@@ -373,14 +440,14 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 					className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 items-center p-[16px] sm:p-[20px] md:p-[24px] xl:p-[24px_40px] w-[calc(90vw)] rounded-[15px] sm:rounded-[20px] md:rounded-[25px] bg-[var(--neutral-background)] shadow-primary absolute bottom-[-350px] md:bottom-[-350px] lg:bottom-[-180px] xl:bottom-[-100px] left-1/2 transform -translate-x-1/2 h-auto xl:h-[145px] z-[50] gap-[24px] lg:gap-auto'
 					aria-label='Car rental search form'
 					aria-describedby='form-description'
-					initial={{ opacity: 0, translateY: '30px' }}
-					animate={{ opacity: 1, translateY: '0px' }}
+					initial={{ opacity: 0, translateY: '20px', scale: 0.98 }}
+					animate={{ opacity: 1, translateY: '0px', scale: 1 }}
 					transition={{
 						duration: 0.8,
-						delay: 0.8,
+						delay: 0.6,
 						type: 'spring',
-						stiffness: 70,
-						damping: 15,
+						stiffness: 80,
+						damping: 20,
 					}}
 					style={{ willChange: 'transform' }}
 				>
@@ -399,11 +466,11 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 								<FormItem className='flex flex-col md:flex-row items-start md:items-center justify-center gap-[16px] xl:gap-[24px] w-full'>
 									<motion.div
 										className='hidden md:block lg:hidden xl:block'
-										whileHover={{ scale: 1.1, rotate: 10 }}
+										whileHover={{ scale: 1.05, rotate: 5 }}
 										transition={{
 											type: 'spring',
-											stiffness: 300,
-											damping: 15,
+											stiffness: 200,
+											damping: 20,
 										}}
 									>
 										<CarFront
@@ -420,41 +487,79 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 										</FormLabel>
 										<FormControl>
 											<div className='w-full'>
-												<Select onValueChange={field.onChange} defaultValue={field.value}>
-													<SelectTrigger
-														id='car-brand-select'
-														className={`w-full font-poppins text-[14px] font-normal leading-[20px] border-[1px] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent p-[8px_12px] rounded-[4px] cursor-pointer ${
-															field.value ?
-																'text-[var(--primary-light)] border-[var(--primary-extra-light)] focus:border-[var(--primary-extra-light)]'
-															:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)] focus:border-[var(--neutral-dividers)]'
-														}`}
-														aria-label='Select car brand'
-														aria-describedby={field.value ? undefined : 'brand-help'}
-													>
-														<SelectValue placeholder='Select car brand' />
-													</SelectTrigger>
-													<SelectContent
-														className='bg-[var(--neutral-surface)] border-none shadow-none w-[var(--radix-select-trigger-width)] rounded-[4px] h-[400px] overflow-y-auto'
+												<Popover open={open} onOpenChange={setOpen}>
+													<PopoverTrigger asChild>
+														<Button
+															ref={triggerRef}
+															id='car-brand-select'
+															variant='outline'
+															role='combobox'
+															aria-expanded={open}
+															className={`w-full font-poppins text-[14px] font-normal leading-[20px] border-[1px] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent p-[8px_12px] rounded-[4px] cursor-pointer justify-between ${
+																field.value ?
+																	'text-[var(--primary-light)] border-[var(--primary-extra-light)] focus:border-[var(--primary-extra-light)]'
+																:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)] focus:border-[var(--neutral-dividers)]'
+															}`}
+															aria-label='Select car brand'
+															aria-describedby={field.value ? undefined : 'brand-help'}
+														>
+															<span className='flex-1 text-left overflow-hidden text-ellipsis whitespace-nowrap pr-2'>
+																{field.value && carBrands.length > 0 ?
+																	carBrands.find(
+																		(brand) => brand.value === field.value,
+																	)?.label
+																:	'Select car brand'}
+															</span>
+															<ChevronDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+														</Button>
+													</PopoverTrigger>
+													<PopoverContent
+														className='bg-[var(--neutral-surface)] border-none shadow-none rounded-[8px] max-h-[350px] p-[8px]'
 														sideOffset={10}
 														side='bottom'
-														position='popper'
 														align='start'
+														avoidCollisions={false}
+														collisionPadding={0}
+														style={{ width: contentWidth }}
 													>
-														{carBrands.map((brand) => (
-															<SelectItem
-																key={brand.value}
-																value={brand.value}
-																className={`font-poppins text-[14px] font-normal leading-[20px] cursor-pointer ${
-																	field.value === brand.value ?
-																		'text-[var(--primary)] font-medium'
-																	:	'text-[var(--neutral-strong-text)]'
-																}`}
-															>
-																{brand.label}
-															</SelectItem>
-														))}
-													</SelectContent>
-												</Select>
+														<Command>
+															<CommandInput
+																placeholder='Search car brands...'
+																className='text-[var(--neutral-strong-text)] text-[14px] font-poppins font-normal border-none outline-none shadow-none'
+															/>
+															<CommandEmpty className='text-[var(--neutral-strong-text)] text-[14px] font-poppins font-normal py-6 text-center'>
+																No car brands found.
+															</CommandEmpty>
+															<CommandList className='h-[250px] overflow-y-auto custom-scrollbar'>
+																<CommandGroup>
+																	{carBrands.map((brand) => (
+																		<CommandItem
+																			key={brand.value}
+																			value={brand.value}
+																			onSelect={(currentValue) => {
+																				field.onChange(
+																					currentValue === field.value ?
+																						''
+																					:	currentValue,
+																				);
+																				setOpen(false);
+																			}}
+																			className={`font-poppins text-[14px] font-normal leading-[20px] cursor-pointer hover:bg-[var(--neutral-extra-light)] focus:bg-[var(--neutral-extra-light)] flex items-center gap-2 ${
+																				field.value === brand.value ?
+																					'text-[var(--primary)] font-medium'
+																				:	'text-[var(--neutral-strong-text)]'
+																			}`}
+																		>
+																			<span className='flex-1 overflow-hidden text-ellipsis whitespace-nowrap'>
+																				{brand.label}
+																			</span>
+																		</CommandItem>
+																	))}
+																</CommandGroup>
+															</CommandList>
+														</Command>
+													</PopoverContent>
+												</Popover>
 											</div>
 										</FormControl>
 										{!field.value && (
@@ -480,11 +585,11 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 								<FormItem className='flex flex-col md:flex-row items-start md:items-center gap-[16px] xl:gap-[24px] w-full'>
 									<motion.div
 										className='hidden md:block lg:hidden xl:block'
-										whileHover={{ scale: 1.1, rotate: 10 }}
+										whileHover={{ scale: 1.05, rotate: 5 }}
 										transition={{
 											type: 'spring',
-											stiffness: 300,
-											damping: 15,
+											stiffness: 200,
+											damping: 20,
 										}}
 									>
 										<CalendarDays
@@ -561,11 +666,11 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 								<FormItem className='flex flex-col md:flex-row items-start md:items-center gap-[16px] xl:gap-[24px] w-full'>
 									<motion.div
 										className='hidden md:block lg:hidden xl:block'
-										whileHover={{ scale: 1.1, rotate: 10 }}
+										whileHover={{ scale: 1.05, rotate: 5 }}
 										transition={{
 											type: 'spring',
-											stiffness: 300,
-											damping: 15,
+											stiffness: 200,
+											damping: 20,
 										}}
 									>
 										<CalendarDays
@@ -635,19 +740,19 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 					<div className='w-full pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)]'>
 						<div className='h-[68px] flex items-center justify-center'>
 							<motion.div
-								whileHover={{ scale: 1.025 }}
-								whileTap={{ scale: 0.95 }}
+								whileHover={{ scale: 1.01 }}
+								whileTap={{ scale: 0.99 }}
 								transition={{
-									duration: 0.3,
-									type: 'tween',
-									stiffness: 300,
-									damping: 15,
+									duration: 0.15,
+									type: 'spring',
+									stiffness: 500,
+									damping: 30,
 								}}
 								className='w-full'
 							>
 								<Button
 									type='submit'
-									className='text-[var(--white)] t-style-link bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer w-full'
+									className='text-[var(--white)] t-style-link bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-150 cursor-pointer w-full'
 									aria-describedby='search-help'
 								>
 									Search Cars
