@@ -3,38 +3,10 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { UseFormReturn } from 'react-hook-form';
 import { ROUTES } from '@/lib/constants';
 import { motion } from 'framer-motion';
-import {
-	Button,
-	Separator,
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-	Calendar,
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
-} from '@/components/ui';
-import { CalendarDays, CarFront, ChevronDown } from 'lucide-react';
-import { format } from 'date-fns';
-import type { SearchFormData } from '@/lib/validations';
-import { carBrands } from '@/lib/constants';
-
-interface HeroProps {
-	form: UseFormReturn<SearchFormData>;
-	onSubmit: (data: SearchFormData) => void;
-}
+import { Separator } from '@/components/ui';
+import { Users, Car, MapPin, Star } from 'lucide-react';
 
 const fadeIn = {
 	hidden: { opacity: 0, translateY: '30px' },
@@ -110,33 +82,67 @@ const mobileSlideIn = {
 	},
 };
 
-export const Hero = ({ form, onSubmit }: HeroProps) => {
-	const [open, setOpen] = React.useState(false);
-	const triggerRef = React.useRef<HTMLButtonElement>(null);
-	const [contentWidth, setContentWidth] = React.useState<string | number>('auto');
+const statsContainer = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			delayChildren: 0.8,
+			staggerChildren: 0.15,
+			duration: 0.4,
+			ease: [0.25, 0.1, 0.25, 1],
+		},
+	},
+};
 
-	React.useEffect(() => {
-		if (triggerRef.current) {
-			setContentWidth(triggerRef.current.offsetWidth);
-		}
-	}, [open]);
+const statItem = {
+	hidden: {
+		opacity: 0,
+		translateX: '40px',
+		scale: 0.9,
+	},
+	visible: {
+		opacity: 1,
+		translateX: '0px',
+		scale: 1,
+		transition: {
+			duration: 0.7,
+			ease: [0.25, 0.1, 0.25, 1],
+			type: 'spring',
+			stiffness: 100,
+			damping: 15,
+		},
+	},
+};
 
-	React.useEffect(() => {
-		const updateWidth = () => {
-			if (triggerRef.current) {
-				setContentWidth(triggerRef.current.offsetWidth);
-			}
-		};
-
-		updateWidth();
-		window.addEventListener('resize', updateWidth);
-
-		return () => window.removeEventListener('resize', updateWidth);
-	}, []);
+export const Hero = () => {
+	// Stats data
+	const stats = [
+		{
+			icon: Users,
+			value: '25,000+',
+			description: 'Satisfied customers worldwide',
+		},
+		{
+			icon: Car,
+			value: '500+',
+			description: 'Premium cars in our fleet',
+		},
+		{
+			icon: MapPin,
+			value: '50+',
+			description: 'Convenient locations',
+		},
+		{
+			icon: Star,
+			value: '4.9/5',
+			description: 'Average customer rating',
+		},
+	];
 
 	return (
 		<motion.section
-			className='relative w-full mb-[350px] md:mb-[350px] lg:mb-[180px] xl:mb-[100px]'
+			className='relative w-full mb-[520px] md:mb-[120px] lg:mb-[150px] xl:mb-[100px]'
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{
@@ -433,338 +439,58 @@ export const Hero = ({ form, onSubmit }: HeroProps) => {
 				</div>
 			</header>
 
-			<Form {...form}>
-				<motion.form
-					id='car-search-form'
-					onSubmit={form.handleSubmit(onSubmit)}
-					className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 items-center p-[16px] sm:p-[20px] md:p-[24px] xl:p-[24px_40px] w-[calc(90vw)] rounded-[15px] sm:rounded-[20px] md:rounded-[25px] bg-[var(--neutral-background)] shadow-primary absolute bottom-[-350px] md:bottom-[-350px] lg:bottom-[-180px] xl:bottom-[-100px] left-1/2 transform -translate-x-1/2 h-auto xl:h-[145px] z-[50] gap-[24px] lg:gap-auto'
-					aria-label='Car rental search form'
-					aria-describedby='form-description'
-					initial={{ opacity: 0, translateY: '20px', scale: 0.98 }}
-					animate={{ opacity: 1, translateY: '0px', scale: 1 }}
-					transition={{
-						duration: 0.8,
-						delay: 0.6,
-						type: 'spring',
-						stiffness: 80,
-						damping: 20,
-					}}
-					style={{ willChange: 'transform' }}
-				>
-					<div id='form-description' className='sr-only'>
-						Search for available rental cars by selecting your preferred brand and rental dates
-					</div>
+			{/* Stats Section */}
+			<motion.div
+				className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center p-[16px] sm:p-[20px] md:p-[24px] xl:p-[24px_40px] w-[calc(90vw)] rounded-[15px] sm:rounded-[20px] md:rounded-[25px] bg-[var(--neutral-background)] shadow-primary absolute bottom-[-510px] md:bottom-[-120px] lg:bottom-[-140px] xl:bottom-[-100px] left-1/2 transform -translate-x-1/2 h-auto xl:h-[145px] z-[50] gap-[24px] lg:gap-auto'
+				aria-label='Company statistics'
+				variants={statsContainer}
+				initial='hidden'
+				animate='visible'
+				style={{ willChange: 'transform' }}
+			>
+				{stats.map((stat, index) => {
+					const IconComponent = stat.icon;
 
-					<fieldset className='border-0 m-0 p-0 w-full xl:w-auto'>
-						<legend className='sr-only'>Car search parameters</legend>
-
-						{/* Car Brand */}
-						<FormField
-							control={form.control}
-							name='carBrand'
-							render={({ field }) => (
-								<FormItem className='flex flex-col md:flex-row items-start md:items-center justify-center gap-[16px] xl:gap-[24px] w-full'>
-									<motion.div
-										className='hidden md:block lg:hidden xl:block'
-										whileHover={{ scale: 1.05, rotate: 5 }}
-										transition={{
-											type: 'spring',
-											stiffness: 200,
-											damping: 20,
-										}}
-									>
-										<CarFront
-											className='size-[24px] xl:size-[32px] text-[var(--neutral-strong-text)]'
-											aria-hidden='true'
-										/>
-									</motion.div>
-									<div className='flex flex-col items-start gap-[8px] w-full'>
-										<FormLabel
-											className='text-[var(--neutral-headings)] t-style-link'
-											htmlFor='car-brand-select'
-										>
-											Car Brand
-										</FormLabel>
-										<FormControl>
-											<div className='w-full'>
-												<Popover open={open} onOpenChange={setOpen}>
-													<PopoverTrigger asChild>
-														<Button
-															ref={triggerRef}
-															id='car-brand-select'
-															variant='outline'
-															role='combobox'
-															aria-expanded={open}
-															className={`w-full font-poppins text-[14px] font-normal leading-[20px] border-[1px] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent p-[8px_12px] rounded-[4px] cursor-pointer justify-between ${
-																field.value ?
-																	'text-[var(--primary-light)] border-[var(--primary-extra-light)] focus:border-[var(--primary-extra-light)]'
-																:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)] focus:border-[var(--neutral-dividers)]'
-															}`}
-															aria-label='Select car brand'
-															aria-describedby={field.value ? undefined : 'brand-help'}
-														>
-															<span className='flex-1 text-left overflow-hidden text-ellipsis whitespace-nowrap pr-2'>
-																{field.value && carBrands.length > 0 ?
-																	carBrands.find(
-																		(brand) => brand.value === field.value,
-																	)?.label
-																:	'Select car brand'}
-															</span>
-															<ChevronDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
-														</Button>
-													</PopoverTrigger>
-													<PopoverContent
-														className='bg-[var(--neutral-surface)] border-none shadow-none rounded-[8px] max-h-[350px] p-[8px]'
-														sideOffset={10}
-														side='bottom'
-														align='start'
-														avoidCollisions={false}
-														collisionPadding={0}
-														style={{ width: contentWidth }}
-													>
-														<Command>
-															<CommandInput
-																placeholder='Search car brands...'
-																className='text-[var(--neutral-strong-text)] text-[14px] font-poppins font-normal border-none outline-none shadow-none'
-															/>
-															<CommandEmpty className='text-[var(--neutral-strong-text)] text-[14px] font-poppins font-normal py-6 text-center'>
-																No car brands found.
-															</CommandEmpty>
-															<CommandList className='h-[250px] overflow-y-auto custom-scrollbar'>
-																<CommandGroup>
-																	{carBrands.map((brand) => (
-																		<CommandItem
-																			key={brand.value}
-																			value={brand.value}
-																			onSelect={(currentValue) => {
-																				field.onChange(
-																					currentValue === field.value ?
-																						''
-																					:	currentValue,
-																				);
-																				setOpen(false);
-																			}}
-																			className={`font-poppins text-[14px] font-normal leading-[20px] cursor-pointer hover:bg-[var(--neutral-extra-light)] focus:bg-[var(--neutral-extra-light)] flex items-center gap-2 ${
-																				field.value === brand.value ?
-																					'text-[var(--primary)] font-medium'
-																				:	'text-[var(--neutral-strong-text)]'
-																			}`}
-																		>
-																			<span className='flex-1 overflow-hidden text-ellipsis whitespace-nowrap'>
-																				{brand.label}
-																			</span>
-																		</CommandItem>
-																	))}
-																</CommandGroup>
-															</CommandList>
-														</Command>
-													</PopoverContent>
-												</Popover>
-											</div>
-										</FormControl>
-										{!field.value && (
-											<div id='brand-help' className='sr-only'>
-												Choose from our available car brands
-											</div>
-										)}
-										<FormMessage className='text-[14px] leading-[20px] font-poppins font-normal text-[var(--error)]' />
-									</div>
-								</FormItem>
-							)}
-						/>
-					</fieldset>
-
-					<fieldset className='pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)] w-full xl:w-auto'>
-						<legend className='sr-only'>Pickup date selection</legend>
-
-						{/* Pickup Date */}
-						<FormField
-							control={form.control}
-							name='pickupDate'
-							render={({ field }) => (
-								<FormItem className='flex flex-col md:flex-row items-start md:items-center gap-[16px] xl:gap-[24px] w-full'>
-									<motion.div
-										className='hidden md:block lg:hidden xl:block'
-										whileHover={{ scale: 1.05, rotate: 5 }}
-										transition={{
-											type: 'spring',
-											stiffness: 200,
-											damping: 20,
-										}}
-									>
-										<CalendarDays
-											className='size-[24px] xl:size-[32px] text-[var(--neutral-strong-text)]'
-											aria-hidden='true'
-										/>
-									</motion.div>
-									<div className='flex flex-col items-start gap-[8px] w-full'>
-										<FormLabel
-											className='text-[var(--neutral-headings)] t-style-link'
-											htmlFor='pickup-date-button'
-										>
-											Pickup Date
-										</FormLabel>
-										<Popover>
-											<PopoverTrigger asChild>
-												<FormControl>
-													<div className='w-full'>
-														<Button
-															id='pickup-date-button'
-															className={`text-[14px] font-normal leading-[20px] font-poppins bg-transparent cursor-pointer w-full border-[1px] border-[var(--neutral-dividers)] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent focus-visible:!border-transparent p-[8px_12px] justify-start rounded-[4px] ${
-																field.value ?
-																	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
-																:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)]'
-															}`}
-															aria-haspopup='dialog'
-															aria-expanded={false}
-															type='button'
-														>
-															{field.value ? format(field.value, 'PPP') : 'Choose a date'}
-														</Button>
-													</div>
-												</FormControl>
-											</PopoverTrigger>
-											<PopoverContent
-												className='w-auto p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
-												align='start'
-												sideOffset={10}
-												side='bottom'
-												role='dialog'
-												aria-label='Calendar picker for pickup date'
-											>
-												<Calendar
-													mode='single'
-													selected={field.value}
-													onSelect={field.onChange}
-													captionLayout='dropdown'
-													disabled={(date) => {
-														const today = new Date();
-														today.setHours(0, 0, 0, 0);
-
-														return date < today;
-													}}
-													autoFocus
-													className='w-full border-0 bg-[var(--neutral-surface)] p-3 [&_.rdp-month_caption]:text-[var(--neutral-strong-text)] [&_.rdp-month_caption]:font-poppins [&_.rdp-month_caption]:text-[14px] [&_.rdp-month_caption]:font-medium [&_.rdp-weekday]:text-[var(--neutral-body-text)] [&_.rdp-weekday]:font-poppins [&_.rdp-weekday]:text-[12px] [&_.rdp-weekday]:font-normal [&_.rdp-day]:text-[var(--neutral-strong-text)] [&_.rdp-day]:font-poppins [&_.rdp-day]:text-[14px] [&_.rdp-day]:font-normal [&_.rdp-day:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-day:hover]:text-[var(--neutral-emphasis-text)] [&_.rdp-day[data-selected-single=true]]:bg-[var(--primary)] [&_.rdp-day[data-selected-single=true]]:text-[var(--white)] [&_.rdp-day[data-today=true]]:bg-[var(--neutral-extra-light)] [&_.rdp-day[data-today=true]]:text-[var(--neutral-emphasis-text)] [&_.rdp-nav-button]:border [&_.rdp-nav-button]:border-[var(--neutral-dividers)] [&_.rdp-nav-button]:text-[var(--neutral-strong-text)] [&_.rdp-nav-button:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-dropdown]:border [&_.rdp-dropdown]:border-[var(--neutral-dividers)] [&_.rdp-dropdown]:bg-[var(--neutral-surface)] [&_.rdp-dropdown]:text-[var(--neutral-strong-text)] [&_.rdp-dropdown]:font-poppins [&_.rdp-dropdown]:text-[14px] [&_.rdp-dropdown]:rounded-[4px]'
-												/>
-											</PopoverContent>
-										</Popover>
-										<FormMessage className='text-[14px] leading-[20px] font-poppins font-normal text-[var(--error)]' />
-									</div>
-								</FormItem>
-							)}
-						/>
-					</fieldset>
-
-					<fieldset className='pl-0 xl:pl-[24px] border-l-0 xl:border-l border-[var(--neutral-dividers)] w-full xl:w-auto'>
-						<legend className='sr-only'>Return date selection</legend>
-
-						{/* Return Date */}
-						<FormField
-							control={form.control}
-							name='returnDate'
-							render={({ field }) => (
-								<FormItem className='flex flex-col md:flex-row items-start md:items-center gap-[16px] xl:gap-[24px] w-full'>
-									<motion.div
-										className='hidden md:block lg:hidden xl:block'
-										whileHover={{ scale: 1.05, rotate: 5 }}
-										transition={{
-											type: 'spring',
-											stiffness: 200,
-											damping: 20,
-										}}
-									>
-										<CalendarDays
-											className='size-[24px] xl:size-[32px] text-[var(--neutral-strong-text)]'
-											aria-hidden='true'
-										/>
-									</motion.div>
-									<div className='flex flex-col items-start gap-[8px] w-full'>
-										<FormLabel
-											className='text-[var(--neutral-headings)] t-style-link'
-											htmlFor='return-date-button'
-										>
-											Return Date
-										</FormLabel>
-										<Popover>
-											<PopoverTrigger asChild>
-												<FormControl>
-													<div className='w-full'>
-														<Button
-															id='return-date-button'
-															className={`text-[14px] font-normal leading-[20px] font-poppins bg-transparent cursor-pointer w-full border-[1px] border-[var(--neutral-dividers)] outline-none shadow-none focus-visible:!ring-0 focus-visible:!ring-transparent focus-visible:!border-transparent p-[8px_12px] justify-start rounded-[4px] ${
-																field.value ?
-																	'text-[var(--primary-light)] border-[var(--primary-extra-light)]'
-																:	'text-[var(--neutral-strong-text)] border-[var(--neutral-dividers)]'
-															}`}
-															aria-haspopup='dialog'
-															aria-expanded={false}
-															type='button'
-														>
-															{field.value ? format(field.value, 'PPP') : 'Choose a date'}
-														</Button>
-													</div>
-												</FormControl>
-											</PopoverTrigger>
-											<PopoverContent
-												className='w-auto p-0 bg-[var(--neutral-surface)] outline-none border-none shadow-none rounded-[4px]'
-												align='start'
-												sideOffset={10}
-												side='bottom'
-												role='dialog'
-												aria-label='Calendar picker for return date'
-											>
-												<Calendar
-													mode='single'
-													selected={field.value}
-													onSelect={field.onChange}
-													captionLayout='dropdown'
-													disabled={(date) => {
-														const today = new Date();
-														today.setHours(0, 0, 0, 0);
-
-														return date < today;
-													}}
-													autoFocus
-													className='w-full border-0 bg-[var(--neutral-surface)] p-3 [&_.rdp-month_caption]:text-[var(--neutral-strong-text)] [&_.rdp-month_caption]:font-poppins [&_.rdp-month_caption]:text-[14px] [&_.rdp-month_caption]:font-medium [&_.rdp-weekday]:text-[var(--neutral-body-text)] [&_.rdp-weekday]:font-poppins [&_.rdp-weekday]:text-[12px] [&_.rdp-weekday]:font-normal [&_.rdp-day]:text-[var(--neutral-strong-text)] [&_.rdp-day]:font-poppins [&_.rdp-day]:text-[14px] [&_.rdp-day]:font-normal [&_.rdp-day:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-day:hover]:text-[var(--neutral-emphasis-text)] [&_.rdp-day[data-selected-single=true]]:bg-[var(--primary)] [&_.rdp-day[data-selected-single=true]]:text-[var(--white)] [&_.rdp-day[data-today=true]]:bg-[var(--neutral-extra-light)] [&_.rdp-day[data-today=true]]:text-[var(--neutral-emphasis-text)] [&_.rdp-nav-button]:border [&_.rdp-nav-button]:border-[var(--neutral-dividers)] [&_.rdp-nav-button]:text-[var(--neutral-strong-text)] [&_.rdp-nav-button:hover]:bg-[var(--neutral-extra-light)] [&_.rdp-dropdown]:border [&_.rdp-dropdown]:border-[var(--neutral-dividers)] [&_.rdp-dropdown]:bg-[var(--neutral-surface)] [&_.rdp-dropdown]:text-[var(--neutral-strong-text)] [&_.rdp-dropdown]:font-poppins [&_.rdp-dropdown]:text-[14px] [&_.rdp-dropdown]:rounded-[4px]'
-												/>
-											</PopoverContent>
-										</Popover>
-										<FormMessage className='text-[14px] leading-[20px] font-poppins font-normal text-[var(--error)]' />
-									</div>
-								</FormItem>
-							)}
-						/>
-					</fieldset>
-
-					{/* Search Button */}
-					<div className='w-full pl-0 lg:pl-[24px] border-l-0 lg:border-l border-[var(--neutral-dividers)]'>
-						<div className='h-[68px] flex items-center justify-center'>
+					return (
+						<motion.div
+							key={stat.value}
+							className={`flex flex-col md:flex-row items-center gap-[16px] xl:gap-[24px] w-full ${
+								index < 3 ?
+									'pb-[24px] border-b border-[var(--neutral-dividers)] md:pb-0 md:border-b-0'
+								:	''
+							} ${
+								index === 1 || index === 3 ?
+									'md:pl-[24px] md:border-l md:border-[var(--neutral-dividers)]'
+								:	''
+							} ${index > 0 ? 'xl:pl-[24px] xl:border-l xl:border-[var(--neutral-dividers)]' : ''}`}
+							variants={statItem}
+						>
 							<motion.div
-								whileHover={{ scale: 1.01 }}
-								whileTap={{ scale: 0.99 }}
+								className='block'
+								whileHover={{ scale: 1.05, rotate: 5 }}
 								transition={{
-									duration: 0.15,
 									type: 'spring',
-									stiffness: 500,
-									damping: 30,
+									stiffness: 400,
+									damping: 20,
 								}}
-								className='w-full'
 							>
-								<Button
-									type='submit'
-									className='text-[var(--white)] t-style-link bg-[var(--primary)] border-none outline-none shadow-none rounded-[4px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-150 cursor-pointer w-full'
-									aria-describedby='search-help'
-								>
-									Search Cars
-								</Button>
-								<div id='search-help' className='sr-only'>
-									Search for available rental cars based on your selected criteria
-								</div>
+								<IconComponent
+									className='size-[24px] xl:size-[32px] text-[var(--primary)]'
+									aria-hidden='true'
+								/>
 							</motion.div>
-						</div>
-					</div>
-				</motion.form>
-			</Form>
+							<div className='flex flex-col items-center md:items-start gap-[4px] w-full text-center md:text-left'>
+								<span className='text-[var(--primary)] text-[24px] xl:text-[28px] font-bold font-poppins leading-tight'>
+									{stat.value}
+								</span>
+								<span className='text-[var(--neutral-strong-text)] text-[12px] xl:text-[14px] font-normal font-poppins leading-tight'>
+									{stat.description}
+								</span>
+							</div>
+						</motion.div>
+					);
+				})}
+			</motion.div>
 		</motion.section>
 	);
 };
