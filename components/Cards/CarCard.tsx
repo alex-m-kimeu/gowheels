@@ -6,15 +6,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { CarCardProps } from '@/types/types';
 
-// Button tap animation
-const buttonTap = {
-	scale: 0.98,
-	transition: {
-		duration: 0.1,
-		ease: 'easeInOut',
-	},
-};
-
 export const CarCard: React.FC<CarCardProps> = ({
 	id,
 	image,
@@ -27,15 +18,40 @@ export const CarCard: React.FC<CarCardProps> = ({
 	hasAC,
 }) => {
 	return (
-		<article className='flex flex-col items-center pb-[24px] gap-[24px] w-full rounded-[20px] bg-[var(--white)] shadow-soft'>
-			<figure className='w-full h-[250px] relative' role='img' aria-label={`${name} car image`}>
-				<Image
-					src={image}
-					alt={`${name} - ${type} vehicle`}
-					fill
-					priority
-					className='object-cover rounded-t-[20px]'
-				/>
+		<motion.article
+			className='flex flex-col items-center pb-[24px] gap-[24px] w-full rounded-[16px] bg-[var(--white)] shadow-soft'
+			variants={{
+				hidden: {
+					opacity: 0,
+					y: 60,
+					scale: 0.95,
+				},
+				visible: {
+					opacity: 1,
+					y: 0,
+					scale: 1,
+					transition: {
+						duration: 1.2,
+						ease: [0.25, 0.1, 0.25, 1],
+						type: 'spring',
+						stiffness: 80,
+						damping: 20,
+					},
+				},
+			}}
+		>
+			<figure
+				className='w-full h-[250px] relative overflow-hidden rounded-t-[20px]'
+				role='img'
+				aria-label={`${name} car image`}
+			>
+				<motion.div
+					whileHover={{ scale: 1.05 }}
+					transition={{ duration: 0.3, ease: 'easeInOut' }}
+					className='w-full h-full'
+				>
+					<Image src={image} alt={`${name} - ${type} vehicle`} fill priority className='object-cover' />
+				</motion.div>
 			</figure>
 			<div className='flex flex-col items-start px-[24px] gap-[32px] self-stretch'>
 				<header className='flex flex-col items-start gap-[4px] self-stretch'>
@@ -113,7 +129,16 @@ export const CarCard: React.FC<CarCardProps> = ({
 						</div>
 					</div>
 				</dl>
-				<motion.div whileTap={buttonTap} className='w-full'>
+				<motion.div
+					whileHover={{ scale: 1.025 }}
+					whileTap={{ scale: 0.98 }}
+					transition={{
+						type: 'spring',
+						stiffness: 500,
+						damping: 30,
+					}}
+					className='w-full'
+				>
 					<Link
 						href={`/vehicles/${id}`}
 						className='inline-block text-center text-[var(--white)] t-style-link bg-[var(--primary)] border-none outline-none shadow-none rounded-[8px] px-[16px] py-[8px] hover:bg-[var(--primary-light)] transition-colors duration-200 cursor-pointer w-full'
@@ -123,6 +148,6 @@ export const CarCard: React.FC<CarCardProps> = ({
 					</Link>
 				</motion.div>
 			</div>
-		</article>
+		</motion.article>
 	);
 };
