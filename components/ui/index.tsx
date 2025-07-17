@@ -8,3 +8,5 @@ export * from './popover';
 export * from './select';
 export * from './dialog';
 export * from './command';
+export * from './carousel';
+export * from './avatar';

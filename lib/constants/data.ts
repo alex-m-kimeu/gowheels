@@ -1,5 +1,5 @@
 import type { CarCardProps } from '@/types/types';
-import type { CarLogo } from '@/types/types';
+import type { CarLogo, Testimonial } from '@/types/types';
 
 export const CAR_LOGOS: CarLogo[] = [
 	{
@@ -128,5 +128,48 @@ export const POPULAR_CARS: CarCardProps[] = [
 		doors: 4,
 		passengers: 5,
 		hasAC: true,
+	},
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+	{
+		id: 'testimonial-1',
+		name: 'Sarah Johnson',
+		description:
+			'Amazing service! The car was in perfect condition and the booking process was so smooth. I highly recommend GoWheels for anyone looking for reliable car rentals.',
+		profilePic: '/icons/user.svg',
+		rating: 5,
+	},
+	{
+		id: 'testimonial-2',
+		name: 'Michael Chen',
+		description:
+			'Excellent customer support and competitive prices. The BMW X6 I rented exceeded my expectations. Will definitely use GoWheels again for my next trip.',
+		profilePic: '/icons/user.svg',
+		rating: 5,
+	},
+	{
+		id: 'testimonial-3',
+		name: 'Emily Rodriguez',
+		description:
+			'Great experience from start to finish. The staff was professional and the vehicle was spotless. GoWheels made my vacation hassle-free!',
+		profilePic: '/icons/user.svg',
+		rating: 4,
+	},
+	{
+		id: 'testimonial-4',
+		name: 'David Thompson',
+		description:
+			'Outstanding service! The car was delivered on time and returned without any issues. The pricing is transparent with no hidden fees. Highly recommended!',
+		profilePic: '/icons/user.svg',
+		rating: 5,
+	},
+	{
+		id: 'testimonial-5',
+		name: 'Jessica Park',
+		description:
+			'Perfect for business trips! The luxury sedan I rented was comfortable and reliable. The entire process was professional and efficient.',
+		profilePic: '/icons/user.svg',
+		rating: 4,
 	},
 ];

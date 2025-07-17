@@ -146,3 +146,11 @@ export interface CarLogo {
 	width: number;
 	height: number;
 }
+
+export interface Testimonial {
+	id: string | number;
+	name: string;
+	description: string;
+	profilePic: string;
+	rating?: number;
+}
