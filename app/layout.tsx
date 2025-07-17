@@ -2,6 +2,7 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Poppins } from 'next/font/google';
 import '../styles/globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const dmSans = DM_Sans({
 	subsets: ['latin'],
@@ -36,6 +37,7 @@ export default function RootLayout({
 		<html lang='en' className='overflow-x-hidden'>
 			<body className={`${dmSans.variable} ${poppins.variable} antialiased bg-white overflow-x-hidden`}>
 				{children}
+				<Analytics />
 			</body>
 		</html>
 	);
