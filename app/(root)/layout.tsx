@@ -1,11 +1,13 @@
-import React, { Suspense } from 'react';
-import { Navbar } from '../../components/navbar/Navbar';
+import React from 'react';
+import { Navbar } from '@/components/navbar/Navbar';
+import { Footer } from '@/components/footer/Footer';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<main className='flex flex-col'>
 			<Navbar />
-			<Suspense>{children}</Suspense>
+			{children}
+			<Footer />
 		</main>
 	);
 };
