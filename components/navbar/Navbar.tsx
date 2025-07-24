@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Links, NavLink } from '@/lib/constants/links';
 import { ROUTES } from '@/lib/constants/routes';
 import { Button, Separator } from '@/components/ui';
-import { Menu, X } from 'lucide-react';
+import { MdMenu, MdClose } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar = () => {
@@ -145,7 +145,7 @@ export const Navbar = () => {
 	};
 
 	return (
-		<header className='sticky top-0 z-100 bg-white'>
+		<header className='sticky top-0 z-100 bg-[var(--white)]'>
 			<nav
 				className='flex items-center justify-between py-[8px] px-[16px] md:px-[32px] lg:px-[40px] xl:px-[80px] 2xl:px-[120px]'
 				aria-label='Main navigation'
@@ -166,7 +166,7 @@ export const Navbar = () => {
 
 				{/* Desktop Navigation Links */}
 				<nav
-					className='hidden xl:flex p-[16px] rounded-[50px] bg-white shadow-primary'
+					className='hidden xl:flex p-[16px] rounded-[50px] bg-[var(--white)] shadow-primary'
 					aria-label='Desktop navigation'
 				>
 					<ul className='flex gap-[48px] items-center' role='menubar'>
@@ -230,8 +230,8 @@ export const Navbar = () => {
 								transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
 							>
 								{isMenuOpen ?
-									<X className='size-[20px] text-[var(--primary)]' aria-hidden='true' />
-								:	<Menu className='size-[20px] text-[var(--primary)]' aria-hidden='true' />}
+									<MdClose className='size-[20px] text-[var(--primary)]' aria-hidden='true' />
+								:	<MdMenu className='size-[20px] text-[var(--primary)]' aria-hidden='true' />}
 							</motion.div>
 						</Button>
 					</motion.div>
@@ -276,7 +276,7 @@ export const Navbar = () => {
 											className='border-none outline-none shadow-none rounded-none px-0 py-0'
 											aria-label='Close mobile menu'
 										>
-											<X className='size-[24px] text-[var(--primary)]' aria-hidden='true' />
+											<MdClose className='size-[24px] text-[var(--primary)]' aria-hidden='true' />
 										</Button>
 									</motion.div>
 								</motion.div>

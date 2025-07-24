@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CarCard } from '@/components/Cards';
+import { CarCard } from '@/components/cards';
 import Link from 'next/link';
 import { POPULAR_CARS, ROUTES } from '@/lib/constants';
 import { ArrowRight } from 'lucide-react';
